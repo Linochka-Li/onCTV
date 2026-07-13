@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База знаний onCTV: Рекламные форматы</title>
+    <style>
+        /* ===== ОСНОВНЫЕ СТИЛИ (светлая тема + #7E46FF) ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f0ff;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .book {
+            max-width: 1300px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(126, 70, 255, 0.12), 0 0 0 1px #e8e0f0 inset;
+            padding: 30px 30px 40px;
+            position: relative;
+        }
+
+        .book-header {
+            border-bottom: 2px solid #ede8f5;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .book-title {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #2a1a42;
+        }
+        .book-title span {
+            font-weight: 600;
+            color: #7E46FF;
+        }
+        .book-subtitle {
+            color: #8a7aaa;
+            font-size: 14px;
+        }
+
+        /* ===== ОБЩАЯ ИНФОРМАЦИЯ ===== */
+        .general-info {
+            background: #faf8ff;
+            border-radius: 14px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+            border: 1px solid #ede8f5;
+        }
+
+        .general-info h3 {
+            color: #7E46FF;
+            font-weight: 500;
+            font-size: 18px;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .general-info h3 .badge {
+            font-size: 13px;
+            background: #ede8f5;
+            color: #5a4a7a;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-weight: 400;
+            margin-left: 10px;
+            border: 1px solid #d8d0e8;
+        }
+
+        .info-block {
+            margin-bottom: 16px;
+        }
+        .info-block:last-child { margin-bottom: 0; }
+
+        .info-block-title {
+            color: #4a3a6a;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .info-block-text {
+            color: #2a1a42;
+            font-size: 14px;
+            line-height: 1.6;
+            padding-left: 10px;
+            border-left: 2px solid #ede8f5;
+        }
+
+        .info-block-text ul {
+            list-style: none;
+            padding: 0;
+            margin: 4px 0;
+        }
+        .info-block-text ul li {
+            padding: 3px 0 3px 18px;
+            position: relative;
+        }
+        .info-block-text ul li::before {
+            content: '•';
+            color: #7E46FF;
+            position: absolute;
+            left: 0;
+        }
+
+        .info-block-text .highlight {
+            color: #7E46FF;
+            font-weight: 500;
+        }
+
+        .info-block-text .definition {
+            background: #f0ebf8;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #4a3a6a;
+        }
+
+        .info-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 12px;
+            margin-top: 4px;
+        }
+        .info-tags .tag {
+            background: #f0ebf8;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #4a3a6a;
+            border: 1px solid #e0d8ee;
+        }
+
+        .info-tags .tag-success {
+            background: #e8f5ee;
+            border-color: #b0d8c0;
+            color: #1a5a3a;
+        }
+
+        /* Прайс-листы */
+        .price-list-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ede8f5;
+        }
+
+        .price-list-section h4 {
+            color: #4a3a6a;
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .price-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .price-list-item {
+            background: #f8f5ff;
+            border: 1px solid #ede8f5;
+            border-radius: 10px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #2a1a42;
+            cursor: pointer;
+        }
+        .price-list-item:hover {
+            background: #f0ebf8;
+            border-color: #7E46FF;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(126, 70, 255, 0.1);
+        }
+
+        .price-list-item .pl-icon {
+            font-size: 22px;
+        }
+        .price-list-item .pl-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .price-list-item .pl-size {
+            font-size: 11px;
+            color: #8a7aaa;
+        }
+
+        /* ===== ВКЛАДКИ ===== */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 4px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #ede8f5;
+            padding-bottom: 12px;
+        }
+
+        .tab-button {
+            padding: 10px 22px;
+            background: transparent;
+            border: none;
+            border-radius: 30px 30px 0 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: #8a7aaa;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        .tab-button:hover {
+            background: #f5f0ff;
+            color: #4a3a6a;
+        }
+        .tab-button.active {
+            background: #ffffff;
+            color: #7E46FF;
+            box-shadow: 0 -2px 12px rgba(126, 70, 255, 0.08), 0 1px 0 #ffffff;
+        }
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 20%;
+            width: 60%;
+            height: 3px;
+            background: #7E46FF;
+            border-radius: 3px 3px 0 0;
+        }
+        .tab-count {
+            display: inline-block;
+            background: #ede8f5;
+            color: #8a7aaa;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 1px 8px;
+            border-radius: 12px;
+            margin-left: 5px;
+        }
+        .tab-button.active .tab-count {
+            background: #7E46FF;
+            color: #ffffff;
+        }
+
+        /* ===== КОНТЕНТ ВКЛАДОК ===== */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0.4; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== ПРОФИЛЬ ВЕНДОРА ===== */
+        .vendor-profile {
+            background: #faf8ff;
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            border: 1px solid #ede8f5;
+        }
+
+        .vendor-profile h4 {
+            color: #7E46FF;
+            font-size: 17px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .vendor-profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px 20px;
+        }
+
+        .vendor-profile-item {
+            color: #2a1a42;
+            font-size: 14px;
+        }
+        .vendor-profile-item .label {
+            color: #8a7aaa;
+            font-weight: 400;
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .vendor-profile-item .value {
+            font-weight: 500;
+            color: #1a0a2a;
+        }
+        .vendor-profile-item .value .highlight {
+            color: #7E46FF;
+        }
+
+        /* ===== КАРТОЧКИ ФОРМАТОВ ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 20px 22px 22px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04), 0 0 0 1px #ede8f5;
+            transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(126, 70, 255, 0.08), 0 0 0 1px #7E46FF;
+            border-color: #7E46FF;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a0a2a;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .card-vendor {
+            font-size: 13px;
+            font-weight: 400;
+            color: #7E46FF;
+            background: #f0ebf8;
+            padding: 2px 14px;
+            border-radius: 20px;
+            border: 1px solid #e0d8ee;
+        }
+
+        .card-description {
+            font-size: 13px;
+            color: #5a4a7a;
+            line-height: 1.5;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ede8f5;
+            margin-bottom: 4px;
+        }
+
+        .card-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed #ede8f5;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .card-field:last-of-type { border-bottom: none; }
+
+        .field-label {
+            color: #8a7aaa;
+            font-weight: 400;
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+        .field-value {
+            color: #2a1a42;
+            font-weight: 500;
+            text-align: right;
+            word-break: break-word;
+            max-width: 65%;
+        }
+
+        .field-value a {
+            color: #7E46FF;
+            text-decoration: none;
+            border-bottom: 1px dotted #d8d0e8;
+            transition: border-color 0.2s;
+        }
+        .field-value a:hover {
+            border-bottom: 1px solid #7E46FF;
+            color: #6a3ae8;
+        }
+
+        .field-value .badge {
+            background: #f0ebf8;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 400;
+            color: #4a3a6a;
+            border: 1px solid #e0d8ee;
+            display: inline-block;
+        }
+
+        .field-value .badge-success {
+            background: #e8f5ee;
+            color: #1a5a3a;
+            border-color: #b0d8c0;
+        }
+
+        .field-value .badge-danger {
+            background: #f5e8e8;
+            color: #5a1a1a;
+            border-color: #d8b0b0;
+        }
+
+        .field-value .badge-warning {
+            background: #f5f0e8;
+            color: #5a4a1a;
+            border-color: #d8c8a0;
+        }
+
+        .field-value .badge-exclusive {
+            background: #f0e8f8;
+            color: #5a2a8a;
+            border-color: #d0b8e8;
+        }
+
+        .card-footer {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #ede8f5;
+            font-size: 12px;
+            color: #8a7aaa;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .card-footer a {
+            color: #7E46FF;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .card-footer a:hover { color: #6a3ae8; }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8a7aaa;
+            font-size: 16px;
+        }
+        .empty-state span {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 600px) {
+            .book { padding: 20px 15px; }
+            .book-title { font-size: 22px; }
+            .tabs { gap: 4px; }
+            .tab-button { padding: 8px 14px; font-size: 13px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .card-field { flex-wrap: wrap; }
+            .field-value { max-width: 100%; text-align: left; margin-top: 3px; }
+            .vendor-profile-grid { grid-template-columns: 1fr; }
+            .general-info { padding: 15px; }
+            .price-list-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="book" id="app">
+    <!-- ШАПКА -->
+    <div class="book-header">
+        <div class="book-title">📖 База <span>знаний</span></div>
+        <div class="book-subtitle">Рекламные форматы • {{ totalItems }} записей</div>
+    </div>
+
+    <!-- ===== ОБЩАЯ ИНФОРМАЦИЯ ===== -->
+    <div class="general-info">
+        <h3>📌 Общая информация <span class="badge">для всех продуктов</span></h3>
+
+        <!-- Платформы + OTT/IPTV -->
+        <div class="info-block">
+            <div class="info-block-title">🏷️ Инвентарь и платформы</div>
+            <div class="info-block-text">
+                <p><strong>onCTV Apps</strong> — пакетное размещение в приложениях и стриминговых сервисах на смарт-ТВ.</p>
+                
+                <p style="margin-top:6px;"><span class="highlight">OTT</span> <span class="definition">(Over-The-Top)</span> — доставка видео контента через открытый интернет без участия традиционных операторов связи или кабельных провайдеров. Это основа onCTV Apps.</p>
+                
+                <p style="margin-top:4px;"><span class="highlight">IPTV</span> <span class="definition">(Internet Protocol Television)</span> — подключение к оператору платного ТВ через приставку (кабельные сети, спутниковые тарелки, IP-приставки). Услуги цифрового телевидения (Ростелеком, Билайн, Триколор и др.).</p>
+                
+                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                    📌 В ряде OTT-приложений доступно размещение в IPTV (Wink, Peers, Sputnik24, Lime и др.). Отдельно размещение в IPTV не предоставляется.
+                </p>
+                <p style="margin-top:4px;"><strong>onCTV Vendors</strong> — размещение непосредственно в ОС телевизоров: Xiaomi, Haier, LG, TCL.</p>
+            </div>
+        </div>
+
+        <!-- Технология Adspector -->
+        <div class="info-block">
+            <div class="info-block-title">⚙️ Технология таргетинга (Adspector DSP)</div>
+            <div class="info-block-text">
+                <p>Все кампании в Smart TV приложениях запускаются через DSP Adspector.</p>
+                <ul>
+                    <li><span class="highlight">Метчинг</span> по Stable ID и cookies для идентификации пользователей и присвоения интересов на основе просмотренного контента и используемых приложений.</li>
+                    <li><span class="highlight">Match rate</span> на CTV — 7-10%, поэтому применяются широкие таргетинги по базовым категориям (спорт, здоровье, семья) и LAL.</li>
+                    <li>Дополнительно подключаются данные <span class="highlight">DMP и ОФД</span> для обогащения профилей.</li>
+                </ul>
+                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                    📌 <span class="highlight">Unskip-видео</span> — настраивается с 6-й по 20-ю секунду ролика.
+                </p>
+            </div>
+        </div>
+
+        <!-- Соцдем -->
+        <div class="info-block">
+            <div class="info-block-title">👤 Определение соцдема пользователя</div>
+            <div class="info-block-text">
+                <p>Smart TV дает размытый профиль, поэтому платформа:</p>
+                <ul>
+                    <li>Связывает ТВ с другими устройствами в домашней сети и собирает устойчивый профиль домохозяйства.</li>
+                    <li>Из профиля выбирается «главное» устройство или наиболее выраженный пользовательский профиль.</li>
+                    <li>Он используется для соц-дем-таргетинга на Smart TV.</li>
+                </ul>
+                <p style="margin-top:4px;">
+                    <span class="highlight">Stable ID</span> — устойчивый обезличенный идентификатор на базе стабильного сигнала (устройство, аккаунт, телефон, e-mail). Помогает «склеить» показы на ТВ с профилем пользователя.
+                </p>
+            </div>
+        </div>
+
+        <!-- Охват и частота -->
+        <div class="info-block">
+            <div class="info-block-title">📊 Охват и частота в Smart TV</div>
+            <div class="info-block-text">
+                <p>Smart TV — cookless среда. Частота и охват считаются по:</p>
+                <ul>
+                    <li><span class="highlight">Device ID / Ad ID</span> — уникальный идентификатор Smart TV, ОС или CTV-приложения.</li>
+                    <li><span class="highlight">Household ID</span> — один IP домохозяйства объединяет несколько устройств (TV + мобильные + десктопы).</li>
+                </ul>
+                <p style="margin-top:4px;">
+                    <span class="highlight">Охват</span> — количество уникальных устройств или домохозяйств, где был хотя бы один показ кампании за период.<br>
+                    <span class="highlight">Частота</span> — среднее число показов на одно устройство/домохозяйство.
+                </p>
+                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                    📌 DSP определяет домашние сети, объединяет устройства внутри одного домохозяйства и использует профиль наиболее активного устройства для таргетинга.
+                </p>
+            </div>
+        </div>
+
+        <!-- Форматы (общий список) -->
+        <div class="info-block">
+            <div class="info-block-title">📺 Основные форматы размещения</div>
+            <div class="info-block-text">
+                <p><span class="highlight">onCTV Apps:</span> Pre-roll, Switch-roll, Patch-roll, Баннер на паузе</p>
+                <p style="margin-top:4px;"><span class="highlight">onCTV Vendors:</span> баннерные и видеоформаты в ОС телевизоров</p>
+                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                    📌 <span class="highlight">Видеоформат в ОС</span> размещают: LG, TCL, Xiaomi
+                </p>
+            </div>
+        </div>
+
+        <!-- Таргетинги (общие) -->
+        <div class="info-block">
+            <div class="info-block-title">🎯 Общие возможности таргетинга</div>
+            <div class="info-block-text">
+                <p><span class="highlight">onCTV Apps:</span></p>
+                <div class="info-tags">
+                    <span class="tag">ГЕО</span>
+                    <span class="tag">Пол/возраст</span>
+                    <span class="tag">Доход (диагонали)</span>
+                    <span class="tag">Жанры ТВ</span>
+                    <span class="tag">Контент за 30 дней</span>
+                    <span class="tag">Интересы</span>
+                    <span class="tag">Частота показов</span>
+                    <span class="tag">Временные интервалы</span>
+                </div>
+                <p style="margin-top:6px; font-size:13px; color:#8a7aaa;">
+                    <span class="highlight">В вендорах:</span> таргетинги ограничены — детали в карточках форматов.
+                </p>
+            </div>
+        </div>
+
+        <!-- Модели закупки -->
+        <div class="info-block">
+            <div class="info-block-title">💰 Модели закупки и коммерческие условия</div>
+            <div class="info-block-text">
+                <ul>
+                    <li><span class="highlight">Модель:</span> только CPM</li>
+                    <li><span class="highlight">Минимальный бюджет (месяц, до НДС):</span> onCTV Apps — 500 000 ₽, onCTV Vendors — 500 000 ₽ (LG, Haier, Xiaomi) / 1 000 000 ₽ (TCL)</li>
+                    <li><span class="highlight">Сезонников и наценок нет</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BLS (общее) -->
+        <div class="info-block">
+            <div class="info-block-title">🔬 BLS — исследования эффективности</div>
+            <div class="info-block-text">
+                <ul>
+                    <li><span class="highlight">onCTV Apps</span> — BLS от 1.5 млн ₽ (РК &lt; 61 дн.), Traffic Lift от 2 млн ₽</li>
+                    <li><span class="highlight">TCL</span> — доступен BLS от 3 млн ₽ для Homepage Video и Homepage Banner</li>
+                    <li><span class="highlight">LG</span> — доступен BLS от 3 млн ₽</li>
+                    <li><span class="highlight">Haier</span> — доступен BLS от 3 млн ₽ (при наличии другого вендора в МП)</li>
+                    <li><span class="highlight">Xiaomi</span> — ❌ BLS не доступен</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Исследования и верификация (общее) -->
+        <div class="info-block">
+            <div class="info-block-title">📊 Исследования и верификация</div>
+            <div class="info-block-text">
+                <p><span class="highlight">Доступные исследования:</span> BLS, Traffic/visit-lift, поствью, кросс-канальная атрибуция, Adriver, Weborama, Adjust/AppsFlyer.</p>
+                <p style="margin-top:4px;"><span class="highlight">Верификаторы:</span> все известные верификаторы, в процессе интеграции с Mediahills.</p>
+                <p style="margin-top:4px;"><span class="highlight">Панельные измерители:</span> OMI, Mediahills, Oro, Tiburon.</p>
+                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                    📌 Детали по трекингу для каждого формата — в карточках.
+                </p>
+            </div>
+        </div>
+
+        <!-- Прайс-листы -->
+        <div class="price-list-section">
+            <h4>📎 Прайс-листы (вложения)</h4>
+            <div class="price-list-grid">
+                <a href="#" class="price-list-item" @click.prevent="downloadPriceList('LG')">
+                    <span class="pl-icon">📄</span>
+                    <div>
+                        <div class="pl-name">LG Smart TV</div>
+                        <div class="pl-size">Прайс-лист 2026</div>
+                    </div>
+                </a>
+                <a href="#" class="price-list-item" @click.prevent="downloadPriceList('TCL')">
+                    <span class="pl-icon">📄</span>
+                    <div>
+                        <div class="pl-name">TCL</div>
+                        <div class="pl-size">Прайс-лист 2026</div>
+                    </div>
+                </a>
+                <a href="#" class="price-list-item" @click.prevent="downloadPriceList('Haier')">
+                    <span class="pl-icon">📄</span>
+                    <div>
+                        <div class="pl-name">Haier</div>
+                        <div class="pl-size">Прайс-лист 2026</div>
+                    </div>
+                </a>
+                <a href="#" class="price-list-item" @click.prevent="downloadPriceList('Xiaomi')">
+                    <span class="pl-icon">📄</span>
+                    <div>
+                        <div class="pl-name">Xiaomi</div>
+                        <div class="pl-size">Прайс-лист 2026</div>
+                    </div>
+                </a>
+            </div>
+            <p style="font-size:12px; color:#8a7aaa; margin-top:8px;">
+                ⚡ Цены указаны в рублях РФ без НДС и действительны в 2026 году.
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== ВКЛАДКИ ===== -->
+    <div class="tabs">
+        <button class="tab-button" v-for="(vendorData, vendor) in groupedData" 
+                :key="vendor"
+                :class="{ active: activeTab === vendor }"
+                @click="activeTab = vendor">
+            {{ vendor }}
+            <span class="tab-count">{{ vendorData.formats.length }}</span>
+        </button>
+    </div>
+
+    <!-- ===== КОНТЕНТ ВКЛАДОК ===== -->
+    <div class="tab-content" v-for="(vendorData, vendor) in groupedData"
+         :key="vendor"
+         :class="{ active: activeTab === vendor }">
+
+        <!-- Профиль вендора -->
+        <div class="vendor-profile" v-if="vendorData.profile">
+            <h4>📋 {{ vendor }} — особенности</h4>
+            <div class="vendor-profile-grid">
+                <div class="vendor-profile-item" v-for="(value, key) in vendorData.profile" :key="key">
+                    <span class="label">{{ key }}</span>
+                    <span class="value" v-html="value"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карточки форматов -->
+        <div class="cards-grid" v-if="vendorData.formats.length">
+            <div class="card" v-for="(item, idx) in vendorData.formats" :key="idx">
+                <div class="card-title">
+                    {{ item.format }}
+                    <span class="card-vendor">{{ item.vendor }}</span>
+                </div>
+
+                <div class="card-description" v-if="item.description">
+                    {{ item.description }}
+                </div>
+
+                <div class="card-field" v-if="item.link">
+                    <span class="field-label">Ссылка</span>
+                    <span class="field-value"><a :href="item.link" target="_blank">Открыть</a></span>
+                </div>
+
+                <div class="card-field" v-if="item.geo">
+                    <span class="field-label">Гео / условия</span>
+                    <span class="field-value">{{ item.geo }}</span>
+                </div>
+
+                <div class="card-field" v-if="item.impressions">
+                    <span class="field-label">Макс. показы</span>
+                    <span class="field-value">{{ item.impressions }}</span>
+                </div>
+
+                <div class="card-field" v-if="item.cpm">
+                    <span class="field-label">CPM</span>
+                    <span class="field-value">{{ item.cpm }}</span>
+                </div>
+
+                <div class="card-field" v-if="item.cost">
+                    <span class="field-label">Бюджет</span>
+                    <span class="field-value">{{ item.cost }}</span>
+                </div>
+
+                <div class="card-field" v-if="item.targeting">
+                    <span class="field-label">Таргетинг</span>
+                    <span class="field-value"><span class="badge">{{ item.targeting }}</span></span>
+                </div>
+
+                <div class="card-field" v-if="item.tracking">
+                    <span class="field-label">Трекинг</span>
+                    <span class="field-value">
+                        <span class="badge" :class="{
+                            'badge-success': item.tracking.includes('есть') || item.tracking.includes('доступна') || item.tracking.includes('пиксель'),
+                            'badge-danger': item.tracking.includes('нет') || item.tracking.includes('не получится')
+                        }">{{ item.tracking }}</span>
+                    </span>
+                </div>
+
+                <div class="card-field" v-if="item.bls">
+                    <span class="field-label">BLS</span>
+                    <span class="field-value">
+                        <span class="badge" :class="{
+                            'badge-success': item.bls.includes('доступен') || item.bls.includes('проводим') || item.bls.includes('от'),
+                            'badge-danger': item.bls.includes('не') || item.bls.includes('нет')
+                        }">{{ item.bls }}</span>
+                    </span>
+                </div>
+
+                <div class="card-field" v-if="item.timeSettings">
+                    <span class="field-label">Время показа</span>
+                    <span class="field-value">
+                        <span class="badge" :class="{
+                            'badge-success': item.timeSettings.includes('можно'),
+                            'badge-warning': item.timeSettings.includes('ручная')
+                        }">{{ item.timeSettings }}</span>
+                    </span>
+                </div>
+
+                <div class="card-field" v-if="item.research">
+                    <span class="field-label">Исследования</span>
+                    <span class="field-value"><span class="badge">{{ item.research }}</span></span>
+                </div>
+
+                <div class="card-field" v-if="item.openrtb">
+                    <span class="field-label">Запуск</span>
+                    <span class="field-value"><span class="badge badge-success">{{ item.openrtb }}</span></span>
+                </div>
+
+                <div class="card-footer" v-if="item.files && item.files.length">
+                    <span>📎 Материалы</span>
+                    <span>
+                        <a v-for="(file, fIdx) in item.files" :key="fIdx" 
+                           :href="file" target="_blank" style="margin-left:8px;">
+                           📄 {{ fIdx + 1 }}
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="empty-state" v-else>
+            <span>📭</span> Для этого вендора пока нет форматов
+        </div>
+    </div>
+</div>
+
+<!-- ===== VUE.JS ===== -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        activeTab: '',
+        rawData: [
+            // ===== onCTV Apps =====
+            { 
+                vendor: 'onCTV Apps', 
+                format: 'Pre-roll', 
+                link: 'https://disk.yandex.ru/d/THyML63Db4UY2Q',
+                description: 'В начале фильмов или сериалов из библиотеки приложения в VOD-приложениях.',
+                geo: 'Диагонали (доход, Гео, Тип устройства, Интересы, Контент)', 
+                impressions: '—', 
+                cpm: '320 ₽', 
+                cost: 'от 500 000 ₽', 
+                targeting: 'ГЕО, возраст, пол, доход, жанры, контент за 30 дней, интересы, частота, время', 
+                tracking: 'пиксель любого верификатора (без кода)',
+                bls: 'доступен BLS от 1.5 млн ₽, Traffic Lift от 2 млн ₽',
+                timeSettings: '—',
+                research: 'BLS, Traffic Lift, поствью, кросс-канальная атрибуция',
+                files: ['https://disk.yandex.ru/d/U-U0C2HRvb7CzQ', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'onCTV Apps', 
+                format: 'Switch-roll', 
+                link: 'https://disk.yandex.ru/d/THyML63Db4UY2Q',
+                description: 'При переключении каналов – ролик появляется перед началом контента в TV-агрегаторах.',
+                geo: 'Диагонали (доход, Гео, Тип устройства, Интересы, Контент)', 
+                impressions: '—', 
+                cpm: '320 ₽', 
+                cost: 'от 500 000 ₽', 
+                targeting: 'ГЕО, возраст, пол, доход, жанры, контент за 30 дней, интересы, частота, время', 
+                tracking: 'пиксель любого верификатора (без кода)',
+                bls: 'доступен BLS от 1.5 млн ₽, Traffic Lift от 2 млн ₽',
+                timeSettings: '—',
+                research: 'BLS, Traffic Lift, поствью, кросс-канальная атрибуция',
+                files: ['https://disk.yandex.ru/d/U-U0C2HRvb7CzQ', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'onCTV Apps', 
+                format: 'Patch-roll', 
+                link: 'https://disk.yandex.ru/d/THyML63Db4UY2Q',
+                description: 'Ролик накладывается поверх эфирной ТВ-рекламы в TV-агрегаторах.',
+                geo: 'Диагонали (доход, Гео, Тип устройства, Интересы, Контент)', 
+                impressions: '—', 
+                cpm: '320 ₽', 
+                cost: 'от 500 000 ₽', 
+                targeting: 'ГЕО, возраст, пол, доход, жанры, контент за 30 дней, интересы, частота, время', 
+                tracking: 'пиксель любого верификатора (без кода)',
+                bls: 'доступен BLS от 1.5 млн ₽, Traffic Lift от 2 млн ₽',
+                timeSettings: '—',
+                research: 'BLS, Traffic Lift, поствью, кросс-канальная атрибуция',
+                files: ['https://disk.yandex.ru/d/U-U0C2HRvb7CzQ', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'onCTV Apps', 
+                format: 'Баннер на паузе', 
+                link: 'https://disk.yandex.ru/d/THyML63Db4UY2Q',
+                description: 'Баннер на весь экран при остановке видео в VOD-приложениях. Снимается при снятии паузы.',
+                geo: 'Диагонали (доход, Гео, Тип устройства, Интересы, Контент)', 
+                impressions: '—', 
+                cpm: '320 ₽', 
+                cost: 'от 500 000 ₽', 
+                targeting: 'ГЕО, возраст, пол, доход, жанры, контент за 30 дней, интересы, частота, время', 
+                tracking: 'пиксель любого верификатора (без кода)',
+                bls: 'доступен BLS от 1.5 млн ₽, Traffic Lift от 2 млн ₽',
+                timeSettings: '—',
+                research: 'BLS, Traffic Lift, поствью, кросс-канальная атрибуция',
+                files: ['https://disk.yandex.ru/d/U-U0C2HRvb7CzQ', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+
+            // ===== TCL =====
+            { 
+                vendor: 'TCL', 
+                format: 'TCL Homepage Video Adslot', 
+                link: 'https://disk.yandex.ru/d/JtPXpPvqdUwgvw',
+                description: 'Видео до 60 сек на главной странице TCL Channel. Проигрывается в маленьком плеере, при наведении — фуллскрин.',
+                geo: 'Диагонали (доход, Гео)', 
+                impressions: '25 000 000', 
+                cpm: '600 ₽', 
+                cost: 'до 15 000 000 ₽', 
+                targeting: 'только ГЕО (РФ)', 
+                tracking: 'есть пиксель на показ (любой)',
+                bls: 'доступен BLS от 3 млн ₽ (от 7 млн показов)',
+                timeSettings: 'можно настроить время показа',
+                research: 'BLS, Traffic/visit-lift, Adjust (мобильная атрибуция)',
+                openrtb: 'openRTB (500 000 ₽) или через Китай (1 000 000 ₽)',
+                files: ['https://disk.yandex.ru/d/httq4XYvz3vnsw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'TCL', 
+                format: 'TCL Homepage Banner Adslot', 
+                link: 'https://disk.yandex.ru/d/JtPXpPvqdUwgvw',
+                description: 'Баннер на главной странице TCL Channel. Возможен переход в стор или на сайт по клику.',
+                geo: 'Диагонали (доход, Гео)', 
+                impressions: '20 000 000', 
+                cpm: '600 ₽', 
+                cost: 'до 12 000 000 ₽', 
+                targeting: 'только ГЕО (РФ)', 
+                tracking: 'трекинга нет',
+                bls: 'доступен BLS от 3 млн ₽',
+                timeSettings: 'можно настроить время показа',
+                research: 'BLS, Traffic/visit-lift',
+                openrtb: 'openRTB (500 000 ₽) или через Китай (1 000 000 ₽)',
+                files: ['https://disk.yandex.ru/d/httq4XYvz3vnsw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'TCL', 
+                format: 'TCL Banner in Launcher', 
+                link: 'https://disk.yandex.ru/d/JtPXpPvqdUwgvw',
+                description: 'Баннер в лончере до запуска TCL Channel. Возможен переход в приложение/стор или на сайт.',
+                geo: 'Диагонали (доход, Гео)', 
+                impressions: '15 000 000', 
+                cpm: '450 ₽', 
+                cost: 'до 6 750 000 ₽', 
+                targeting: 'только ГЕО (РФ)', 
+                tracking: 'доступна установка пикселя верификатора',
+                bls: 'не проводим',
+                timeSettings: '—',
+                research: '—',
+                openrtb: 'только через Китай (1 000 000 ₽)',
+                files: ['https://disk.yandex.ru/d/httq4XYvz3vnsw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'TCL', 
+                format: 'TCL Banner in Browser', 
+                link: 'https://disk.yandex.ru/d/JtPXpPvqdUwgvw',
+                description: 'Баннер в браузере на телевизоре TCL.',
+                geo: 'Диагонали (доход, Гео)', 
+                impressions: '10 000 000', 
+                cpm: '350 ₽', 
+                cost: 'до 3 500 000 ₽', 
+                targeting: 'только ГЕО (РФ)', 
+                tracking: 'трекинга нет',
+                bls: 'не проводим',
+                timeSettings: '—',
+                research: '—',
+                openrtb: 'только через Китай (1 000 000 ₽)',
+                files: ['https://disk.yandex.ru/d/httq4XYvz3vnsw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+
+            // ===== Haier =====
+            { 
+                vendor: 'Haier', 
+                format: 'Haier Banner Scroller', 
+                link: 'https://disk.yandex.ru/d/Ml8k02fj-Q2SKg',
+                description: 'Баннер-скроллер в центре главной страницы Haier Evo TV. Кликабельный, можно вести на Google Play или лендинг с QR.',
+                geo: 'РФ (автоматически)', 
+                impressions: '3 500 000', 
+                cpm: '600 ₽', 
+                cost: 'до 2 100 000 ₽', 
+                targeting: 'нет (ГЕО РФ)', 
+                tracking: 'пиксель на показ (любой)',
+                bls: 'доступен от 3 млн ₽ (при наличии другого вендора в МП)',
+                timeSettings: 'ручная автоматизация (теоретически можно)',
+                research: 'BLS (при наличии другого вендора)',
+                files: ['https://disk.yandex.ru/d/NhhQHNQLv_al0Q', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+
+            // ===== Xiaomi =====
+            { 
+                vendor: 'Xiaomi', 
+                format: 'Xiaomi Homepage Banner', 
+                link: 'https://disk.yandex.ru/d/9Rs3PRu8plGDTw',
+                description: 'Размещение на главной странице платформы Xiaomi.',
+                geo: 'РФ (автоматически)', 
+                impressions: '15 000 000', 
+                cpm: '600 ₽', 
+                cost: 'до 9 000 000 ₽', 
+                targeting: 'РФ 18+', 
+                tracking: 'пиксель на клик (любой), на показ — Adriver',
+                bls: 'не доступен',
+                timeSettings: 'можно настроить время показа',
+                research: 'Weborama (кросс-канальный замер post-view)',
+                files: ['https://disk.yandex.ru/d/eyNwLyZBzbFcCg', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'Xiaomi', 
+                format: 'Xiaomi inner pages', 
+                link: 'https://disk.yandex.ru/d/K1cT-USfv0JiDA',
+                description: 'Размещение на внутренних страницах платформы Xiaomi.',
+                geo: 'РФ (автоматически)', 
+                impressions: '7 500 000', 
+                cpm: '600 ₽', 
+                cost: 'до 4 500 000 ₽', 
+                targeting: 'РФ 18+', 
+                tracking: 'пиксель на клик (любой), на показ — Adriver',
+                bls: 'не доступен',
+                timeSettings: 'можно настроить время показа',
+                research: 'Weborama (кросс-канальный замер post-view)',
+                files: ['https://disk.yandex.ru/d/eyNwLyZBzbFcCg', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'Xiaomi', 
+                format: 'Xiaomi Branding', 
+                link: 'https://disk.yandex.ru/d/MjpmpymbT6z4og',
+                description: '⭐ ЭКСКЛЮЗИВНЫЙ ФОРМАТ! Брендинг интегрируется с баннером, трансформируя зону меню.',
+                geo: 'РФ 18+ (автоматически)', 
+                impressions: '7 500 000', 
+                cpm: '1 400 ₽', 
+                cost: 'до 10 500 000 ₽', 
+                targeting: 'нет (РФ 18+ автоматически)', 
+                tracking: 'пиксель на клик (любой), на показ — только Adriver',
+                bls: 'не доступен',
+                timeSettings: 'можно настроить время показа',
+                research: 'Weborama (кросс-канальный замер post-view)',
+                files: ['https://disk.yandex.ru/d/eyNwLyZBzbFcCg', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+
+            // ===== LG =====
+            { 
+                vendor: 'LG', 
+                format: 'LG Home Hero', 
+                link: 'https://disk.yandex.ru/d/qTleksZkgtKcsQ',
+                description: '⭐ Эксклюзивный формат, доступен только у нас. Размещение в ОС LG (не LG Channels).',
+                geo: 'Диагонали (доход, Гео, Тип устройства)', 
+                impressions: '40 000 000', 
+                cpm: '700 ₽', 
+                cost: 'до 28 000 000 ₽', 
+                targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры (Movie/Sports/Action/Reality/Comedy/Drama/Sci-Fi)', 
+                tracking: 'пиксель на показ (любой)',
+                bls: 'доступен BLS от 3 млн ₽',
+                timeSettings: 'можно настроить время показа',
+                research: 'BLS, Traffic/visit-lift, AppsFlyer (мобильная атрибуция)',
+                files: ['https://disk.yandex.ru/d/QbJ1y74keaP6zw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'LG', 
+                format: 'LG Discovery', 
+                link: 'https://disk.yandex.ru/d/qTleksZkgtKcsQ',
+                description: 'Формат Discovery в ОС LG.',
+                geo: 'Диагонали (доход, Гео, Тип устройства)', 
+                impressions: '—', 
+                cpm: '570 ₽', 
+                cost: 'от 500 000 ₽', 
+                targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
+                tracking: 'пиксель на показ (любой)',
+                bls: 'доступен BLS от 3 млн ₽',
+                timeSettings: 'можно настроить время показа',
+                research: 'BLS, Traffic/visit-lift',
+                files: ['https://disk.yandex.ru/d/QbJ1y74keaP6zw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'LG', 
+                format: 'LG Browser Hero', 
+                link: 'https://disk.yandex.ru/d/qTleksZkgtKcsQ',
+                description: 'Формат Browser Hero в ОС LG.',
+                geo: 'Диагонали (доход, Гео, Тип устройства)', 
+                impressions: '—', 
+                cpm: '700 ₽', 
+                cost: 'от 500 000 ₽', 
+                targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
+                tracking: 'пиксель на показ (любой)',
+                bls: 'доступен BLS от 3 млн ₽',
+                timeSettings: 'можно настроить время показа',
+                research: 'BLS, Traffic/visit-lift',
+                files: ['https://disk.yandex.ru/d/QbJ1y74keaP6zw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'LG', 
+                format: 'LG Home recommended', 
+                link: 'https://disk.yandex.ru/d/qTleksZkgtKcsQ',
+                description: 'Формат Home recommended в ОС LG.',
+                geo: 'Диагонали (доход, Гео, Тип устройства)', 
+                impressions: '—', 
+                cpm: '200 ₽', 
+                cost: 'от 500 000 ₽', 
+                targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
+                tracking: 'пиксель на показ (любой)',
+                bls: 'доступен BLS от 3 млн ₽',
+                timeSettings: 'можно настроить время показа',
+                research: 'BLS, Traffic/visit-lift',
+                files: ['https://disk.yandex.ru/d/QbJ1y74keaP6zw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'LG', 
+                format: 'LG Wedge', 
+                link: 'https://disk.yandex.ru/d/qTleksZkgtKcsQ',
+                description: 'Формат Wedge в ОС LG.',
+                geo: 'Диагонали (доход, Гео, Тип устройства)', 
+                impressions: '—', 
+                cpm: '200 ₽', 
+                cost: 'от 500 000 ₽', 
+                targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
+                tracking: 'пиксель на показ (любой)',
+                bls: 'доступен BLS от 3 млн ₽',
+                timeSettings: 'можно настроить время показа',
+                research: 'BLS, Traffic/visit-lift',
+                files: ['https://disk.yandex.ru/d/QbJ1y74keaP6zw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            },
+            { 
+                vendor: 'LG', 
+                format: 'LG Browser DeepWeb', 
+                link: 'https://disk.yandex.ru/d/qTleksZkgtKcsQ',
+                description: 'Формат Browser DeepWeb в ОС LG.',
+                geo: 'Диагонали (доход, Гео, Тип устройства)', 
+                impressions: '—', 
+                cpm: '700 ₽', 
+                cost: 'от 500 000 ₽', 
+                targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
+                tracking: 'пиксель на показ (любой)',
+                bls: 'доступен BLS от 3 млн ₽',
+                timeSettings: 'можно настроить время показа',
+                research: 'BLS, Traffic/visit-lift',
+                files: ['https://disk.yandex.ru/d/QbJ1y74keaP6zw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
+            }
+        ]
+    },
+    computed: {
+        groupedData() {
+            const groups = {};
+            this.rawData.forEach(item => {
+                const vendor = item.vendor || 'Другое';
+                if (!groups[vendor]) {
+                    groups[vendor] = {
+                        formats: [],
+                        profile: this.getVendorProfile(vendor)
+                    };
+                }
+                groups[vendor].formats.push(item);
+            });
+            return groups;
+        },
+        totalItems() {
+            return this.rawData.length;
+        }
+    },
+    methods: {
+        getVendorProfile(vendor) {
+            const profiles = {
+                'onCTV Apps': {
+                    'Тип': 'OTT / Smart TV',
+                    'Таргетинги': 'широкие (ГЕО, пол/возраст, доход, жанры, контент, интересы, частота, время)',
+                    'Трекинг': 'пиксель любого верификатора (без кода)',
+                    'Мин. бюджет': '500 000 ₽/мес',
+                    'Устройства': '8 млн Smart TV',
+                    'Инвентарь': '400+ млн показов/мес'
+                },
+                'TCL': {
+                    'Тип': 'ОС телевизора',
+                    'Таргетинг': 'только ГЕО (РФ)',
+                    'Трекинг': 'Video — пиксель на показ; Banner — трекинга нет',
+                    'Мин. бюджет': '500 000 ₽ (openRTB) / 1 000 000 ₽ (Китай)',
+                    'BLS': 'для Video и Homepage Banner — от 3 млн ₽',
+                    'Время показа': 'можно настроить для Video и Homepage Banner'
+                },
+                'Haier': {
+                    'Тип': 'ОС телевизора',
+                    'Таргетинг': 'нет (ГЕО автоматически РФ)',
+                    'Трекинг': 'пиксель на показ (любой)',
+                    'Мин. бюджет': '500 000 ₽',
+                    'BLS': 'от 3 млн ₽ (при наличии другого вендора в МП)',
+                    'Время показа': 'ручная автоматизация'
+                },
+                'Xiaomi': {
+                    'Тип': 'ОС телевизора',
+                    'Таргетинг': 'РФ 18+ (для Branding — автоматически)',
+                    'Трекинг': 'пиксель на клик (любой), на показ — только Adriver',
+                    'Мин. бюджет': '500 000 ₽',
+                    'BLS': '❌ не доступен',
+                    'Время показа': 'можно настроить',
+                    'Эксклюзив': 'Branding — только у нас'
+                },
+                'LG': {
+                    'Тип': 'ОС телевизора',
+                    'Таргетинг': 'широкие (соц.дем, ГЕО, диагонали, приложения, жанры, Smart TV Type, App Usage)',
+                    'Трекинг': 'пиксель на показ (любой)',
+                    'Мин. бюджет': '500 000 ₽',
+                    'BLS': 'от 3 млн ₽',
+                    'Время показа': 'можно настроить',
+                    'Особенности': 'Наценка +10% за таргетинги, эксклюзивный Home Hero'
+                }
+            };
+            return profiles[vendor] || null;
+        },
+        downloadPriceList(vendor) {
+            const links = {
+                'LG': 'https://ваша-ссылка/LG_Pricelist_2026.pdf',
+                'TCL': 'https://ваша-ссылка/TCL_Pricelist_2026.pdf',
+                'Haier': 'https://ваша-ссылка/Haier_Pricelist_2026.pdf',
+                'Xiaomi': 'https://ваша-ссылка/Xiaomi_Pricelist_2026.pdf'
+            };
+            if (links[vendor]) {
+                window.open(links[vendor], '_blank');
+            } else {
+                alert(`Скачивание прайс-листа ${vendor}...\n\nЗамените ссылку в методе downloadPriceList.`);
+            }
+        }
+    },
+    mounted() {
+        const keys = Object.keys(this.groupedData);
+        if (keys.length) this.activeTab = keys[0];
+    }
+});
+</script>
+
+</body>
+</html>
