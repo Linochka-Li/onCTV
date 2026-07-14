@@ -154,6 +154,18 @@
             color: #1a5a3a;
         }
 
+        .info-tags .tag-warning {
+            background: #f5f0e8;
+            border-color: #d8c8a0;
+            color: #5a4a1a;
+        }
+
+        .info-tags .tag-danger {
+            background: #f5e8e8;
+            border-color: #d8b0b0;
+            color: #5a1a1a;
+        }
+
         /* Прайс-листы */
         .price-list-section {
             margin-top: 15px;
@@ -436,6 +448,12 @@
             border-color: #d0b8e8;
         }
 
+        .field-value .badge-info {
+            background: #e8f0f8;
+            color: #1a4a6a;
+            border-color: #b0c8e0;
+        }
+
         .card-footer {
             margin-top: 12px;
             padding-top: 10px;
@@ -485,7 +503,7 @@
 <div class="book" id="app">
     <!-- ШАПКА -->
     <div class="book-header">
-        <div class="book-title">📖 База <span>знаний<span>onCTV<span>Adspector</span> </div>
+        <div class="book-title">📖 База знаний <span>onCTV Adspector</span></div>
         <div class="book-subtitle">Рекламные форматы • {{ totalItems }} записей</div>
     </div>
 
@@ -510,6 +528,23 @@
             </div>
         </div>
 
+        <!-- Пакеты onCTV Apps -->
+        <div class="info-block">
+            <div class="info-block-title">📦 Пакеты размещения (onCTV Apps)</div>
+            <div class="info-block-text">
+                <p><span class="highlight">Гибкая настройка пакетов:</span></p>
+                <ul>
+                    <li>Можно убрать из пакета <span class="highlight">patch-roll</span> и <span class="highlight">pre-roll</span>, оставив только <span class="highlight">switch-roll</span>.</li>
+                    <li><span class="highlight">Нельзя</span> убрать из пакета switch-roll.</li>
+                    <li>Примерное соотношение в пакете: <span class="highlight">70% switch-roll / 30% patch-roll</span>.</li>
+                    <li>Можно убрать приставку <span class="highlight">STB</span> и оставить только switch-roll.</li>
+                </ul>
+                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                    📌 <span class="highlight">STB</span> (Set-Top Box) — приставка для приема цифрового телевидения.
+                </p>
+            </div>
+        </div>
+
         <!-- Технология Adspector -->
         <div class="info-block">
             <div class="info-block-title">⚙️ Технология таргетинга (Adspector DSP)</div>
@@ -523,6 +558,26 @@
                 <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
                     📌 <span class="highlight">Unskip-видео</span> — настраивается с 6-й по 20-ю секунду ролика.
                 </p>
+            </div>
+        </div>
+
+        <!-- Таргетинг по контенту -->
+        <div class="info-block">
+            <div class="info-block-title">🎯 Таргетинг по контенту в Smart TV</div>
+            <div class="info-block-text">
+                <p>Таргетинг по контенту идет в привязке к тому, <span class="highlight">какой контент сейчас смотрят на телевизоре</span>: жанр, тип контента, тематика и т.д.</p>
+                
+                <p style="margin-top:6px;"><span class="highlight">Как это работает:</span></p>
+                <ul>
+                    <li>Сигналы контента берутся из данных контента от <span class="highlight">паблишеров</span>.</li>
+                    <li>Каждый фильм, сериал или канал в приложениях помечается набором меток: жанр, тематика, возрастной рейтинг, язык, тип (кино, спорт, новости, kids и т.п.).</li>
+                    <li>Паблишер группирует контент в собственные таксономии.</li>
+                </ul>
+                <p style="margin-top:6px;"><span class="highlight">При запросе на показ рекламы передаются контекстные параметры:</span></p>
+                <div class="info-tags">
+                    <span class="tag">ID приложения или канала</span>
+                    <span class="tag">Категория/жанр (спорт, кино, сериалы, kids, новости и т.д.)</span>
+                </div>
             </div>
         </div>
 
@@ -587,6 +642,7 @@
                     <span class="tag">Интересы</span>
                     <span class="tag">Частота показов</span>
                     <span class="tag">Временные интервалы</span>
+                    <span class="tag">Контент сейчас (жанр/тематика)</span>
                 </div>
                 <p style="margin-top:6px; font-size:13px; color:#8a7aaa;">
                     <span class="highlight">В вендорах:</span> таргетинги ограничены — детали в карточках форматов.
@@ -743,12 +799,7 @@
 
                 <div class="card-field" v-if="item.tracking">
                     <span class="field-label">Трекинг</span>
-                    <span class="field-value">
-                        <span class="badge" :class="{
-                            'badge-success': item.tracking.includes('есть') || item.tracking.includes('доступна') || item.tracking.includes('пиксель'),
-                            'badge-danger': item.tracking.includes('нет') || item.tracking.includes('не получится')
-                        }">{{ item.tracking }}</span>
-                    </span>
+                    <span class="field-value" v-html="item.tracking"></span>
                 </div>
 
                 <div class="card-field" v-if="item.bls">
@@ -778,7 +829,7 @@
 
                 <div class="card-field" v-if="item.openrtb">
                     <span class="field-label">Запуск</span>
-                    <span class="field-value"><span class="badge badge-success">{{ item.openrtb }}</span></span>
+                    <span class="field-value"><span class="badge badge-info">{{ item.openrtb }}</span></span>
                 </div>
 
                 <div class="card-footer" v-if="item.files && item.files.length">
@@ -884,7 +935,7 @@ new Vue({
                 cpm: '600 ₽', 
                 cost: 'до 15 000 000 ₽', 
                 targeting: 'только ГЕО (РФ)', 
-                tracking: 'есть пиксель на показ (любой)',
+                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой)</span>',
                 bls: 'доступен BLS от 3 млн ₽ (от 7 млн показов)',
                 timeSettings: 'можно настроить время показа',
                 research: 'BLS, Traffic/visit-lift, Adjust (мобильная атрибуция)',
@@ -901,7 +952,10 @@ new Vue({
                 cpm: '600 ₽', 
                 cost: 'до 12 000 000 ₽', 
                 targeting: 'только ГЕО (РФ)', 
-                tracking: 'трекинга нет',
+                tracking: `
+                    <span class="badge badge-success">✅ через openRTB — пиксель можно поставить</span><br>
+                    <span class="badge badge-danger">❌ через Китай — пиксель поставить нельзя</span>
+                `,
                 bls: 'доступен BLS от 3 млн ₽',
                 timeSettings: 'можно настроить время показа',
                 research: 'BLS, Traffic/visit-lift',
@@ -918,7 +972,7 @@ new Vue({
                 cpm: '450 ₽', 
                 cost: 'до 6 750 000 ₽', 
                 targeting: 'только ГЕО (РФ)', 
-                tracking: 'доступна установка пикселя верификатора',
+                tracking: '✅ <span class="badge badge-success">доступна установка пикселя верификатора</span>',
                 bls: 'не проводим',
                 timeSettings: '—',
                 research: '—',
@@ -935,7 +989,7 @@ new Vue({
                 cpm: '350 ₽', 
                 cost: 'до 3 500 000 ₽', 
                 targeting: 'только ГЕО (РФ)', 
-                tracking: 'трекинга нет',
+                tracking: '❌ <span class="badge badge-danger">трекинга нет</span>',
                 bls: 'не проводим',
                 timeSettings: '—',
                 research: '—',
@@ -954,7 +1008,7 @@ new Vue({
                 cpm: '600 ₽', 
                 cost: 'до 2 100 000 ₽', 
                 targeting: 'нет (ГЕО РФ)', 
-                tracking: 'пиксель на показ (любой)',
+                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой)</span>',
                 bls: 'доступен от 3 млн ₽ (при наличии другого вендора в МП)',
                 timeSettings: 'ручная автоматизация (теоретически можно)',
                 research: 'BLS (при наличии другого вендора)',
@@ -972,7 +1026,7 @@ new Vue({
                 cpm: '600 ₽', 
                 cost: 'до 9 000 000 ₽', 
                 targeting: 'РФ 18+', 
-                tracking: 'пиксель на клик (любой), на показ — Adriver',
+                tracking: '✅ <span class="badge badge-success">пиксель на клик (любой)</span><br>⚠️ <span class="badge badge-warning">пиксель на показ — только Adriver</span>',
                 bls: 'не доступен',
                 timeSettings: 'можно настроить время показа',
                 research: 'Weborama (кросс-канальный замер post-view)',
@@ -988,7 +1042,7 @@ new Vue({
                 cpm: '600 ₽', 
                 cost: 'до 4 500 000 ₽', 
                 targeting: 'РФ 18+', 
-                tracking: 'пиксель на клик (любой), на показ — Adriver',
+                tracking: '✅ <span class="badge badge-success">пиксель на клик (любой)</span><br>⚠️ <span class="badge badge-warning">пиксель на показ — только Adriver</span>',
                 bls: 'не доступен',
                 timeSettings: 'можно настроить время показа',
                 research: 'Weborama (кросс-канальный замер post-view)',
@@ -1004,7 +1058,7 @@ new Vue({
                 cpm: '1 400 ₽', 
                 cost: 'до 10 500 000 ₽', 
                 targeting: 'нет (РФ 18+ автоматически)', 
-                tracking: 'пиксель на клик (любой), на показ — только Adriver',
+                tracking: '✅ <span class="badge badge-success">пиксель на клик (любой)</span><br>⚠️ <span class="badge badge-warning">пиксель на показ — только Adriver</span>',
                 bls: 'не доступен',
                 timeSettings: 'можно настроить время показа',
                 research: 'Weborama (кросс-канальный замер post-view)',
@@ -1022,7 +1076,7 @@ new Vue({
                 cpm: '700 ₽', 
                 cost: 'до 28 000 000 ₽', 
                 targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры (Movie/Sports/Action/Reality/Comedy/Drama/Sci-Fi)', 
-                tracking: 'пиксель на показ (любой)',
+                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой)</span>',
                 bls: 'доступен BLS от 3 млн ₽',
                 timeSettings: 'можно настроить время показа',
                 research: 'BLS, Traffic/visit-lift, AppsFlyer (мобильная атрибуция)',
@@ -1038,7 +1092,7 @@ new Vue({
                 cpm: '570 ₽', 
                 cost: 'от 500 000 ₽', 
                 targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
-                tracking: 'пиксель на показ (любой)',
+                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой)</span>',
                 bls: 'доступен BLS от 3 млн ₽',
                 timeSettings: 'можно настроить время показа',
                 research: 'BLS, Traffic/visit-lift',
@@ -1054,7 +1108,7 @@ new Vue({
                 cpm: '700 ₽', 
                 cost: 'от 500 000 ₽', 
                 targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
-                tracking: 'пиксель на показ (любой)',
+                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой)</span>',
                 bls: 'доступен BLS от 3 млн ₽',
                 timeSettings: 'можно настроить время показа',
                 research: 'BLS, Traffic/visit-lift',
@@ -1070,7 +1124,7 @@ new Vue({
                 cpm: '200 ₽', 
                 cost: 'от 500 000 ₽', 
                 targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
-                tracking: 'пиксель на показ (любой)',
+                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой)</span>',
                 bls: 'доступен BLS от 3 млн ₽',
                 timeSettings: 'можно настроить время показа',
                 research: 'BLS, Traffic/visit-lift',
@@ -1086,7 +1140,7 @@ new Vue({
                 cpm: '200 ₽', 
                 cost: 'от 500 000 ₽', 
                 targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
-                tracking: 'пиксель на показ (любой)',
+                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой)</span>',
                 bls: 'доступен BLS от 3 млн ₽',
                 timeSettings: 'можно настроить время показа',
                 research: 'BLS, Traffic/visit-lift',
@@ -1102,7 +1156,7 @@ new Vue({
                 cpm: '700 ₽', 
                 cost: 'от 500 000 ₽', 
                 targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры', 
-                tracking: 'пиксель на показ (любой)',
+                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой)</span>',
                 bls: 'доступен BLS от 3 млн ₽',
                 timeSettings: 'можно настроить время показа',
                 research: 'BLS, Traffic/visit-lift',
@@ -1143,7 +1197,7 @@ new Vue({
                 'TCL': {
                     'Тип': 'ОС телевизора',
                     'Таргетинг': 'только ГЕО (РФ)',
-                    'Трекинг': 'Video — пиксель на показ; Banner — трекинга нет',
+                    'Трекинг': 'Video — пиксель на показ; Homepage Banner — через openRTB можно, через Китай нельзя; Launcher — пиксель можно; Browser — трекинга нет',
                     'Мин. бюджет': '500 000 ₽ (openRTB) / 1 000 000 ₽ (Китай)',
                     'BLS': 'для Video и Homepage Banner — от 3 млн ₽',
                     'Время показа': 'можно настроить для Video и Homepage Banner'
