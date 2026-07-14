@@ -454,26 +454,26 @@
             border-color: #b0c8e0;
         }
 
-        /* ===== СТАТИСТИКА В КАРТОЧКЕ ===== */
+        /* ===== СТАТИСТИКА В ОТДЕЛЬНОЙ КАРТОЧКЕ ===== */
         .card-stats {
             background: #f8f5ff;
             border-radius: 10px;
-            padding: 12px 14px;
-            margin: 6px 0 4px 0;
+            padding: 14px 16px;
+            margin: 4px 0 2px 0;
             border: 1px solid #ede8f5;
         }
 
         .card-stats .stats-title {
-            color: #4a3a6a;
+            color: #7E46FF;
             font-weight: 600;
-            font-size: 13px;
-            margin-bottom: 6px;
+            font-size: 15px;
+            margin-bottom: 8px;
         }
 
         .stats-row {
             display: flex;
             justify-content: space-between;
-            padding: 2px 0;
+            padding: 3px 0;
             font-size: 13px;
             border-bottom: 1px dashed #ede8f5;
         }
@@ -497,6 +497,14 @@
 
         .stats-sub .stats-row { font-size: 12px; }
         .stats-sub .stats-row .label { color: #9a8aaa; }
+
+        .stats-section-title {
+            color: #4a3a6a;
+            font-weight: 500;
+            font-size: 13px;
+            margin-top: 4px;
+            margin-bottom: 2px;
+        }
 
         .card-footer {
             margin-top: 12px;
@@ -812,8 +820,8 @@
                     {{ item.description }}
                 </div>
 
-                <!-- ===== БЛОК СТАТИСТИКИ ДЛЯ onCTV Apps ===== -->
-                <div class="card-stats" v-if="item.vendor === 'onCTV Apps' && item.showStats">
+                <!-- ===== ОТДЕЛЬНАЯ КАРТОЧКА СТАТИСТИКИ ===== -->
+                <div class="card-stats" v-if="item.isStatsCard">
                     <div class="stats-title">📊 Аудитория и статистика</div>
                     
                     <div class="stats-row">
@@ -861,42 +869,42 @@
                     </div>
                 </div>
 
-                <div class="card-field" v-if="item.link">
+                <div class="card-field" v-if="item.link && !item.isStatsCard">
                     <span class="field-label">Ссылка</span>
                     <span class="field-value"><a :href="item.link" target="_blank">Открыть</a></span>
                 </div>
 
-                <div class="card-field" v-if="item.geo">
+                <div class="card-field" v-if="item.geo && !item.isStatsCard">
                     <span class="field-label">Гео / условия</span>
                     <span class="field-value">{{ item.geo }}</span>
                 </div>
 
-                <div class="card-field" v-if="item.impressions">
+                <div class="card-field" v-if="item.impressions && !item.isStatsCard">
                     <span class="field-label">Макс. показы</span>
                     <span class="field-value">{{ item.impressions }}</span>
                 </div>
 
-                <div class="card-field" v-if="item.cpm">
+                <div class="card-field" v-if="item.cpm && !item.isStatsCard">
                     <span class="field-label">CPM</span>
                     <span class="field-value">{{ item.cpm }}</span>
                 </div>
 
-                <div class="card-field" v-if="item.cost">
+                <div class="card-field" v-if="item.cost && !item.isStatsCard">
                     <span class="field-label">Бюджет</span>
                     <span class="field-value">{{ item.cost }}</span>
                 </div>
 
-                <div class="card-field" v-if="item.targeting">
+                <div class="card-field" v-if="item.targeting && !item.isStatsCard">
                     <span class="field-label">Таргетинг</span>
                     <span class="field-value"><span class="badge">{{ item.targeting }}</span></span>
                 </div>
 
-                <div class="card-field" v-if="item.tracking">
+                <div class="card-field" v-if="item.tracking && !item.isStatsCard">
                     <span class="field-label">Трекинг</span>
                     <span class="field-value" v-html="item.tracking"></span>
                 </div>
 
-                <div class="card-field" v-if="item.bls">
+                <div class="card-field" v-if="item.bls && !item.isStatsCard">
                     <span class="field-label">BLS</span>
                     <span class="field-value">
                         <span class="badge" :class="{
@@ -906,7 +914,7 @@
                     </span>
                 </div>
 
-                <div class="card-field" v-if="item.timeSettings">
+                <div class="card-field" v-if="item.timeSettings && !item.isStatsCard">
                     <span class="field-label">Время показа</span>
                     <span class="field-value">
                         <span class="badge" :class="{
@@ -916,17 +924,17 @@
                     </span>
                 </div>
 
-                <div class="card-field" v-if="item.research">
+                <div class="card-field" v-if="item.research && !item.isStatsCard">
                     <span class="field-label">Исследования</span>
                     <span class="field-value"><span class="badge">{{ item.research }}</span></span>
                 </div>
 
-                <div class="card-field" v-if="item.openrtb">
+                <div class="card-field" v-if="item.openrtb && !item.isStatsCard">
                     <span class="field-label">Запуск</span>
                     <span class="field-value"><span class="badge badge-info">{{ item.openrtb }}</span></span>
                 </div>
 
-                <div class="card-footer" v-if="item.files && item.files.length">
+                <div class="card-footer" v-if="item.files && item.files.length && !item.isStatsCard">
                     <span>📎 Материалы</span>
                     <span>
                         <a v-for="(file, fIdx) in item.files" :key="fIdx" 
@@ -953,6 +961,13 @@ new Vue({
         activeTab: '',
         rawData: [
             // ===== onCTV Apps =====
+            // Карточка со статистикой (отдельная)
+            { 
+                vendor: 'onCTV Apps', 
+                format: '📊 Аудитория и статистика', 
+                isStatsCard: true,
+                description: 'Общая аудитория и география onCTV Apps'
+            },
             { 
                 vendor: 'onCTV Apps', 
                 format: 'Pre-roll', 
@@ -966,7 +981,6 @@ new Vue({
                 bls: 'доступен BLS от 1.5 млн ₽, Traffic Lift от 2 млн ₽',
                 timeSettings: '—',
                 research: 'BLS, Traffic Lift, поствью, кросс-канальная атрибуция',
-                showStats: true,
                 files: ['https://disk.yandex.ru/d/U-U0C2HRvb7CzQ', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
             },
             { 
@@ -982,7 +996,6 @@ new Vue({
                 bls: 'доступен BLS от 1.5 млн ₽, Traffic Lift от 2 млн ₽',
                 timeSettings: '—',
                 research: 'BLS, Traffic Lift, поствью, кросс-канальная атрибуция',
-                showStats: false,
                 files: ['https://disk.yandex.ru/d/U-U0C2HRvb7CzQ', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
             },
             { 
@@ -998,7 +1011,6 @@ new Vue({
                 bls: 'доступен BLS от 1.5 млн ₽, Traffic Lift от 2 млн ₽',
                 timeSettings: '—',
                 research: 'BLS, Traffic Lift, поствью, кросс-канальная атрибуция',
-                showStats: false,
                 files: ['https://disk.yandex.ru/d/U-U0C2HRvb7CzQ', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
             },
             { 
@@ -1014,7 +1026,6 @@ new Vue({
                 bls: 'доступен BLS от 1.5 млн ₽, Traffic Lift от 2 млн ₽',
                 timeSettings: '—',
                 research: 'BLS, Traffic Lift, поствью, кросс-канальная атрибуция',
-                showStats: false,
                 files: ['https://disk.yandex.ru/d/U-U0C2HRvb7CzQ', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA'] 
             },
 
