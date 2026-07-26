@@ -148,6 +148,62 @@
             border-color: #d8b0b0;
             color: #5a1a1a;
         }
+        /* ===== АККОРДЕОН (общая информация) ===== */
+        .accordion-controls {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 14px;
+        }
+        .accordion-toggle-all {
+            background: none;
+            border: none;
+            color: #7E46FF;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .accordion-toggle-all:hover { color: #6a3ae8; }
+        .accordion-section {
+            border: 1px solid #ede8f5;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: #ffffff;
+            overflow: hidden;
+        }
+        .accordion-section:last-of-type { margin-bottom: 0; }
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 16px;
+            color: #4a3a6a;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .accordion-header:hover { background: #f5f0ff; }
+        .accordion-header .chevron {
+            color: #7E46FF;
+            font-size: 20px;
+            line-height: 1;
+            transition: transform 0.25s ease;
+        }
+        .accordion-header.open .chevron { transform: rotate(90deg); }
+        .accordion-body {
+            padding: 4px 18px 16px;
+            background: #faf8ff;
+        }
+        .accordion-body .info-block-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #8a7aaa;
+        }
         /* Прайс-листы */
         .price-list-section {
             margin-top: 15px;
@@ -507,238 +563,249 @@
     <!-- ===== ОБЩАЯ ИНФОРМАЦИЯ ===== -->
     <div class="general-info">
         <h3>📌 Общая информация <span class="badge">для всех продуктов</span></h3>
-        <!-- ⚠️ Расхождения с анкетой для Starlink -->
-        <div class="info-block">
-            <div class="info-block-title">⚠️ Расхождения с анкетой для Starlink (нужна сверка)</div>
-            <div class="info-block-text" style="border-left-color:#d8b0b0;">
-                <ul>
-                    <li><span class="tag tag-danger">DMP / ОФД</span> Ниже в блоке «Технология таргетинга» указано, что подключаются данные <strong>DMP и ОФД</strong> для обогащения профилей. В анкете для Starlink по всем пунктам DMP (3PD/1PD-сегменты, доступ к Data Marketplaces, Telecom Data, Offline/Online Shoppers Data, Financial/Pharmacy-data и т.д.) стоит <strong>«нет»</strong>. Прямое противоречие, оставила обе версии — нужно уточнить у продукта, что верно.</li>
-                    <li><span class="tag tag-danger">TCL Homepage Video, BLS</span> Ранее в файле было условие «от 7 млн показов» — в анкете такого порога нет, указано только ограничение по длительности РК (&lt; 61 дня). Заменила формулировку на анкетную, старое условие не подтверждено.</li>
-                    <li><span class="tag tag-danger">LG Home Hero</span> В файле был один формат «LG Home Hero». В анкете это два отдельных формата с одинаковыми коммерческими условиями — <strong>LG Home Hero Banner</strong> и <strong>LG Home Hero Video</strong> (у видео дополнительно есть VTR). Разделила на 2 карточки.</li>
-                    <li><span class="tag tag-danger">Инвентарь onCTV Apps</span> Список площадок в старых данных («У нас есть»: ivi.ru, okko.tv, cto.ru, Aptoide, TubiTV и др.) отличается от актуального списка в самой анкете (START, KION, Кинопоиск, Билайн ТВ, RUTUBE и др.) — похоже на устаревшие данные. Обновила на актуальный список из анкеты.</li>
-                    <li><span class="tag tag-warning">TCL Homepage Banner, атрибуция</span> Не противоречие, а дополнение: в анкете интеграция Adjust/AppsFlyer указана не только для Homepage Video, но и для Homepage Banner — добавила.</li>
-                </ul>
-            </div>
+        <div class="accordion-controls">
+            <button type="button" class="accordion-toggle-all" @click="setAllSections(true)">Развернуть всё</button>
+            <button type="button" class="accordion-toggle-all" @click="setAllSections(false)">Свернуть всё</button>
         </div>
-        <!-- Платформы + OTT/IPTV -->
-        <div class="info-block">
-            <div class="info-block-title">🏷️ Инвентарь и платформы</div>
-            <div class="info-block-text">
-                <p><strong>onCTV Apps</strong> — пакетное размещение в приложениях и стриминговых сервисах на смарт-ТВ.</p>
 
-                <p style="margin-top:6px;"><span class="highlight">OTT</span> <span class="definition">(Over-The-Top)</span> — доставка видео контента через открытый интернет без участия традиционных операторов связи или кабельных провайдеров. Это основа onCTV Apps.</p>
+        <!-- ===== 1. Инвентарь, платформы и форматы ===== -->
+        <div class="accordion-section">
+            <div class="accordion-header" :class="{ open: openSections.inventory }" @click="openSections.inventory = !openSections.inventory">
+                <span>🏷️ Инвентарь, платформы и форматы</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="accordion-body" v-show="openSections.inventory">
+                <div class="info-block">
+                    <div class="info-block-title">Платформы</div>
+                    <div class="info-block-text">
+                        <p><strong>onCTV Apps</strong> — пакетное размещение в приложениях и стриминговых сервисах на смарт-ТВ.</p>
+                        <p style="margin-top:6px;"><span class="highlight">OTT</span> <span class="definition">(Over-The-Top)</span> — доставка видео контента через открытый интернет без участия традиционных операторов связи или кабельных провайдеров. Это основа onCTV Apps.</p>
+                        <p style="margin-top:4px;"><span class="highlight">IPTV</span> <span class="definition">(Internet Protocol Television)</span> — подключение к оператору платного ТВ через приставку (кабельные сети, спутниковые тарелки, IP-приставки). Услуги цифрового телевидения (Ростелеком, Билайн, Триколор и др.).</p>
+                        <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                            📌 В ряде OTT-приложений доступно размещение в IPTV (Wink, Peers, Sputnik24, Lime и др.). Отдельно размещение в IPTV не предоставляется.
+                        </p>
+                        <p style="margin-top:4px;"><strong>onCTV Vendors</strong> — размещение непосредственно в ОС телевизоров: Xiaomi, Haier, LG, TCL.</p>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-block-title">Список площадок onCTV Apps <span class="definition">59 сервисов</span></div>
+                    <div class="info-block-text">
+                        <p style="font-size:13px; line-height:1.5;">
+                            Можно выбирать/исключать инвентарь (AVOD/Streaming) и ограничивать список каналов: START, KION, Okko, Wink, Кинопоиск, Билайн ТВ, PREMIER, Иви, Матч ТВ, Amediateka, VK Видео, СТС—ТВ, RUTUBE, Смотрёшка, ViNTERA.TV, ProgTV Android, 24ТВ, Лайм HD TV, OttPlayer, Триколор Кино и ТВ, Tvigle, Большое ТВ, Телеканал Домашний, Sputnik24, Kinogo, Kartina, Kinon, Flivora, TVzavr, Лайт Цифровое ТВ онлайн, Цифровое ТВ, Peers.TV, ТВ+, Эфир ТВ, ЦТВ, Лайм, VIDAA Smart TV, Эфир ТВ+, Perfect Player IPTV, IPTV (simple), TV Online, RusTV, RTRS.Плюс, Inetcom.TV, TVOЁ, IPTVPORTAL, TVGuide, Смотрим, Lampa, Лайм HD TV онлайн, Prisma TV, KinoHome, ShowJet, Фильмы и Сериалы, Light HD TV, Zona, VoKino и др.
+                        </p>
+                        <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                            📌 Категории контента внутри инвентаря: топ-каналы, кулинария, развлекательные, музыкальные, путешествия и документальные, научно-популярные, мода и стиль, нишевые музыкальные, «нишевые» и тематические, познавательные, детские, спортивные и ЗОЖ.
+                        </p>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-block-title">Пакеты размещения (onCTV Apps)</div>
+                    <div class="info-block-text">
+                        <p><span class="highlight">Гибкая настройка пакетов:</span></p>
+                        <ul>
+                            <li>Можно убрать из пакета <span class="highlight">patch-roll</span> и <span class="highlight">pre-roll</span>, оставив только <span class="highlight">switch-roll</span>.</li>
+                            <li><span class="highlight">Нельзя</span> убрать из пакета switch-roll.</li>
+                            <li>Примерное соотношение в пакете: <span class="highlight">70% switch-roll / 30% patch-roll</span>.</li>
+                            <li>Можно убрать приставку <span class="highlight">STB</span> и оставить только switch-roll.</li>
+                        </ul>
+                        <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                            📌 <span class="highlight">STB</span> (Set-Top Box) — приставка для приема цифрового телевидения.
+                        </p>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-block-title">Основные форматы размещения</div>
+                    <div class="info-block-text">
+                        <p><span class="highlight">onCTV Apps:</span> Pre-roll, Switch-roll, Patch-roll, Баннер на паузе</p>
+                        <p style="margin-top:4px;"><span class="highlight">onCTV Vendors:</span> баннерные и видеоформаты в ОС телевизоров</p>
+                        <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                            📌 <span class="highlight">Видеоформат в ОС</span> размещают: LG, TCL, Xiaomi
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <p style="margin-top:4px;"><span class="highlight">IPTV</span> <span class="definition">(Internet Protocol Television)</span> — подключение к оператору платного ТВ через приставку (кабельные сети, спутниковые тарелки, IP-приставки). Услуги цифрового телевидения (Ростелеком, Билайн, Триколор и др.).</p>
+        <!-- ===== 2. Таргетинг и технология ===== -->
+        <div class="accordion-section">
+            <div class="accordion-header" :class="{ open: openSections.targeting }" @click="openSections.targeting = !openSections.targeting">
+                <span>🎯 Таргетинг и технология</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="accordion-body" v-show="openSections.targeting">
+                <div class="info-block">
+                    <div class="info-block-title">Технология таргетинга (Adspector DSP)</div>
+                    <div class="info-block-text">
+                        <p>Все кампании в Smart TV приложениях запускаются через DSP Adspector.</p>
+                        <ul>
+                            <li><span class="highlight">Метчинг</span> по Stable ID и cookies для идентификации пользователей и присвоения интересов на основе просмотренного контента и используемых приложений.</li>
+                            <li><span class="highlight">Match rate</span> на CTV — 7-10%, поэтому применяются широкие таргетинги по базовым категориям (спорт, здоровье, семья) и LAL.</li>
+                            <li><span class="highlight">DMP и ОФД</span> в Smart TV не подключаются (ни в onCTV Apps, ни в onCTV Vendors) — таргетинг строится только на Stable ID/cookies-метчинге и LAL.</li>
+                        </ul>
+                        <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                            📌 <span class="highlight">Unskip-видео</span> — настраивается с 6-й по 20-ю секунду ролика.
+                        </p>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-block-title">Таргетинг по контенту в Smart TV</div>
+                    <div class="info-block-text">
+                        <p>Таргетинг по контенту идет в привязке к тому, <span class="highlight">какой контент сейчас смотрят на телевизоре</span>: жанр, тип контента, тематика и т.д.</p>
+                        <p style="margin-top:6px;"><span class="highlight">Как это работает:</span></p>
+                        <ul>
+                            <li>Сигналы контента берутся из данных контента от <span class="highlight">паблишеров</span>.</li>
+                            <li>Каждый фильм, сериал или канал в приложениях помечается набором меток: жанр, тематика, возрастной рейтинг, язык, тип (кино, спорт, новости, kids и т.п.).</li>
+                            <li>Паблишер группирует контент в собственные таксономии.</li>
+                        </ul>
+                        <p style="margin-top:6px;"><span class="highlight">При запросе на показ рекламы передаются контекстные параметры:</span></p>
+                        <div class="info-tags">
+                            <span class="tag">ID приложения или канала</span>
+                            <span class="tag">Категория/жанр (спорт, кино, сериалы, kids, новости и т.д.)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-block-title">Определение соцдема пользователя</div>
+                    <div class="info-block-text">
+                        <p>Smart TV дает размытый профиль, поэтому платформа:</p>
+                        <ul>
+                            <li>Связывает ТВ с другими устройствами в домашней сети и собирает устойчивый профиль домохозяйства.</li>
+                            <li>Из профиля выбирается «главное» устройство или наиболее выраженный пользовательский профиль.</li>
+                            <li>Он используется для соц-дем-таргетинга на Smart TV.</li>
+                        </ul>
+                        <p style="margin-top:4px;">
+                            <span class="highlight">Stable ID</span> — устойчивый обезличенный идентификатор на базе стабильного сигнала (устройство, аккаунт, телефон, e-mail). Помогает «склеить» показы на ТВ с профилем пользователя.
+                        </p>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-block-title">Общие возможности таргетинга</div>
+                    <div class="info-block-text">
+                        <p><span class="highlight">onCTV Apps:</span></p>
+                        <div class="info-tags">
+                            <span class="tag">ГЕО</span>
+                            <span class="tag">Пол/возраст</span>
+                            <span class="tag">Доход (диагонали)</span>
+                            <span class="tag">Жанры ТВ</span>
+                            <span class="tag">Контент за 30 дней</span>
+                            <span class="tag">Интересы</span>
+                            <span class="tag">Частота показов</span>
+                            <span class="tag">Временные интервалы</span>
+                            <span class="tag">Контент сейчас (жанр/тематика)</span>
+                        </div>
+                        <p style="margin-top:6px; font-size:13px; color:#8a7aaa;">
+                            <span class="highlight">В вендорах:</span> таргетинги ограничены — детали в карточках форматов. TCL — только ГЕО и диагонали устройств. LG — соц.дем, ГЕО, диагонали, приложения, жанры. Xiaomi и Haier — таргетинги не настраиваются, ГЕО автоматически РФ.
+                        </p>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-block-title">Технические возможности и DMP</div>
+                    <div class="info-block-text">
+                        <p><span class="highlight">Поддерживается:</span></p>
+                        <div class="info-tags">
+                            <span class="tag tag-success">API Integration</span>
+                            <span class="tag tag-success">Ретаргетинг Smart TV ↔ веб (в обе стороны)</span>
+                        </div>
+                        <p style="margin-top:8px;"><span class="highlight">Не поддерживается:</span></p>
+                        <div class="info-tags">
+                            <span class="tag">Post-campaign logs</span>
+                            <span class="tag">Smart-links / deep-links</span>
+                            <span class="tag">DCO</span>
+                            <span class="tag">ТВ-ретаргетинг (видевшие / не видевшие рекламу)</span>
+                            <span class="tag">Кросс-канальная частота Desktop/Mobile/CTV и с 3P DSP</span>
+                            <span class="tag">3rd party data, эксклюзивные data-партнёрства</span>
+                            <span class="tag">Кастомные сегменты, супергео, WL/BL по приложениям (кроме TCL)</span>
+                            <span class="tag">3PD / 1PD сегменты, Data Marketplaces, Telecom/Offline/Online Shoppers/Financial/Pharmacy Data</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
-                    📌 В ряде OTT-приложений доступно размещение в IPTV (Wink, Peers, Sputnik24, Lime и др.). Отдельно размещение в IPTV не предоставляется.
-                </p>
-                <p style="margin-top:4px;"><strong>onCTV Vendors</strong> — размещение непосредственно в ОС телевизоров: Xiaomi, Haier, LG, TCL.</p>
-                <p style="margin-top:6px;"><span class="highlight">Актуальный список площадок onCTV Apps</span> <span class="definition">по анкете для Starlink, 59 сервисов</span> — можно выбирать/исключать инвентарь (AVOD/Streaming) и ограничивать список каналов:</p>
-                <p style="margin-top:4px; font-size:13px; line-height:1.5;">
-                    START, KION, Okko, Wink, Кинопоиск, Билайн ТВ, PREMIER, Иви, Матч ТВ, Amediateka, VK Видео, СТС—ТВ, RUTUBE, Смотрёшка, ViNTERA.TV, ProgTV Android, 24ТВ, Лайм HD TV, OttPlayer, Триколор Кино и ТВ, Tvigle, Большое ТВ, Телеканал Домашний, Sputnik24, Kinogo, Kartina, Kinon, Flivora, TVzavr, Лайт Цифровое ТВ онлайн, Цифровое ТВ, Peers.TV, ТВ+, Эфир ТВ, ЦТВ, Лайм, VIDAA Smart TV, Эфир ТВ+, Perfect Player IPTV, IPTV (simple), TV Online, RusTV, RTRS.Плюс, Inetcom.TV, TVOЁ, IPTVPORTAL, TVGuide, Смотрим, Lampa, Лайм HD TV онлайн, Prisma TV, KinoHome, ShowJet, Фильмы и Сериалы, Light HD TV, Zona, VoKino и др.
-                </p>
-                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
-                    📌 Категории контента внутри инвентаря: топ-каналы, кулинария, развлекательные, музыкальные, путешествия и документальные, научно-популярные, мода и стиль, нишевые музыкальные, «нишевые» и тематические, познавательные, детские, спортивные и ЗОЖ.
-                </p>
+        <!-- ===== 3. Охват и частота ===== -->
+        <div class="accordion-section">
+            <div class="accordion-header" :class="{ open: openSections.reach }" @click="openSections.reach = !openSections.reach">
+                <span>📊 Охват и частота</span>
+                <span class="chevron">›</span>
             </div>
-        </div>
-        <!-- Пакеты onCTV Apps -->
-        <div class="info-block">
-            <div class="info-block-title">📦 Пакеты размещения (onCTV Apps)</div>
-            <div class="info-block-text">
-                <p><span class="highlight">Гибкая настройка пакетов:</span></p>
-                <ul>
-                    <li>Можно убрать из пакета <span class="highlight">patch-roll</span> и <span class="highlight">pre-roll</span>, оставив только <span class="highlight">switch-roll</span>.</li>
-                    <li><span class="highlight">Нельзя</span> убрать из пакета switch-roll.</li>
-                    <li>Примерное соотношение в пакете: <span class="highlight">70% switch-roll / 30% patch-roll</span>.</li>
-                    <li>Можно убрать приставку <span class="highlight">STB</span> и оставить только switch-roll.</li>
-                </ul>
-                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
-                    📌 <span class="highlight">STB</span> (Set-Top Box) — приставка для приема цифрового телевидения.
-                </p>
-            </div>
-        </div>
-        <!-- Технология Adspector -->
-        <div class="info-block">
-            <div class="info-block-title">⚙️ Технология таргетинга (Adspector DSP)</div>
-            <div class="info-block-text">
-                <p>Все кампании в Smart TV приложениях запускаются через DSP Adspector.</p>
-                <ul>
-                    <li><span class="highlight">Метчинг</span> по Stable ID и cookies для идентификации пользователей и присвоения интересов на основе просмотренного контента и используемых приложений.</li>
-                    <li><span class="highlight">Match rate</span> на CTV — 7-10%, поэтому применяются широкие таргетинги по базовым категориям (спорт, здоровье, семья) и LAL.</li>
-                    <li>Дополнительно подключаются данные <span class="highlight">DMP и ОФД</span> для обогащения профилей. <span class="tag tag-danger">⚠️ по анкете для Starlink все параметры DMP отмечены «нет» — см. блок расхождений выше</span></li>
-                </ul>
-                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
-                    📌 <span class="highlight">Unskip-видео</span> — настраивается с 6-й по 20-ю секунду ролика.
-                </p>
-            </div>
-        </div>
-        <!-- Технические возможности и DMP (анкета Starlink) -->
-        <div class="info-block">
-            <div class="info-block-title">🛠️ Технические возможности и DMP <span class="definition" style="margin-left:6px;">по анкете для Starlink</span></div>
-            <div class="info-block-text">
-                <p><span class="highlight">Поддерживается:</span></p>
-                <div class="info-tags">
-                    <span class="tag tag-success">API Integration</span>
-                    <span class="tag tag-success">Ретаргетинг Smart TV ↔ веб (в обе стороны)</span>
+            <div class="accordion-body" v-show="openSections.reach">
+                <div class="info-block">
+                    <div class="info-block-text">
+                        <p>Smart TV — cookless среда. Частота и охват считаются по:</p>
+                        <ul>
+                            <li><span class="highlight">Device ID / Ad ID</span> — уникальный идентификатор Smart TV, ОС или CTV-приложения.</li>
+                            <li><span class="highlight">Household ID</span> — один IP домохозяйства объединяет несколько устройств (TV + мобильные + десктопы).</li>
+                        </ul>
+                        <p style="margin-top:4px;">
+                            <span class="highlight">Охват</span> — количество уникальных устройств или домохозяйств, где был хотя бы один показ кампании за период.<br>
+                            <span class="highlight">Частота</span> — среднее число показов на одно устройство/домохозяйство.
+                        </p>
+                        <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                            📌 DSP определяет домашние сети, объединяет устройства внутри одного домохозяйства и использует профиль наиболее активного устройства для таргетинга. Цифры по охвату — в карточке «Аудитория и статистика» на вкладке onCTV Apps.
+                        </p>
+                    </div>
                 </div>
-                <p style="margin-top:8px;"><span class="highlight">Не поддерживается:</span></p>
-                <div class="info-tags">
-                    <span class="tag tag-danger">Post-campaign logs</span>
-                    <span class="tag tag-danger">Smart-links / deep-links</span>
-                    <span class="tag tag-danger">DCO</span>
-                    <span class="tag tag-danger">ТВ-ретаргетинг (видевшие / не видевшие рекламу)</span>
-                    <span class="tag tag-danger">Кросс-канальная частота Desktop/Mobile/CTV и с 3P DSP</span>
-                    <span class="tag tag-danger">3rd party data, эксклюзивные data-партнёрства</span>
-                    <span class="tag tag-danger">Кастомные сегменты, супергео, WL/BL по приложениям (кроме TCL)</span>
-                </div>
-                <p style="margin-top:8px;"><span class="highlight">DMP (по анкете — везде «нет»):</span></p>
-                <div class="info-tags">
-                    <span class="tag tag-danger">3PD / 1PD сегменты</span>
-                    <span class="tag tag-danger">Access to Data Marketplaces</span>
-                    <span class="tag tag-danger">Telecom Data</span>
-                    <span class="tag tag-danger">Offline/Online Shoppers Data</span>
-                    <span class="tag tag-danger">Financial Providers Data</span>
-                    <span class="tag tag-danger">Pharmacy-data</span>
-                </div>
-                <p style="margin-top:8px; font-size:13px; color:#8a7aaa;">
-                    📌 Это прямо противоречит формулировке про «подключение DMP и ОФД» выше — см. блок расхождений в начале страницы.
-                </p>
             </div>
         </div>
-        <!-- Таргетинг по контенту -->
-        <div class="info-block">
-            <div class="info-block-title">🎯 Таргетинг по контенту в Smart TV</div>
-            <div class="info-block-text">
-                <p>Таргетинг по контенту идет в привязке к тому, <span class="highlight">какой контент сейчас смотрят на телевизоре</span>: жанр, тип контента, тематика и т.д.</p>
 
-                <p style="margin-top:6px;"><span class="highlight">Как это работает:</span></p>
-                <ul>
-                    <li>Сигналы контента берутся из данных контента от <span class="highlight">паблишеров</span>.</li>
-                    <li>Каждый фильм, сериал или канал в приложениях помечается набором меток: жанр, тематика, возрастной рейтинг, язык, тип (кино, спорт, новости, kids и т.п.).</li>
-                    <li>Паблишер группирует контент в собственные таксономии.</li>
-                </ul>
-                <p style="margin-top:6px;"><span class="highlight">При запросе на показ рекламы передаются контекстные параметры:</span></p>
-                <div class="info-tags">
-                    <span class="tag">ID приложения или канала</span>
-                    <span class="tag">Категория/жанр (спорт, кино, сериалы, kids, новости и т.д.)</span>
+        <!-- ===== 4. Коммерческие условия и BLS ===== -->
+        <div class="accordion-section">
+            <div class="accordion-header" :class="{ open: openSections.commercial }" @click="openSections.commercial = !openSections.commercial">
+                <span>💰 Коммерческие условия и BLS</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="accordion-body" v-show="openSections.commercial">
+                <div class="info-block">
+                    <div class="info-block-title">Модели закупки</div>
+                    <div class="info-block-text">
+                        <ul>
+                            <li><span class="highlight">Модель:</span> только CPM</li>
+                            <li><span class="highlight">Минимальный бюджет (месяц, до НДС):</span> onCTV Apps — 500 000 ₽; onCTV Vendors: LG, Xiaomi, Haier — 500 000 ₽; TCL — 1 000 000 ₽, если в плане есть Launcher и/или Browser, если этих форматов нет в плане — можно 500 000 ₽</li>
+                            <li><span class="highlight">Сезонников и наценок нет</span>, кроме LG — там действует наценка +10% за таргетинги</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-block-title">BLS — исследования эффективности</div>
+                    <div class="info-block-text">
+                        <ul>
+                            <li><span class="highlight">onCTV Apps</span> — BLS от 1.5 млн ₽ (РК &lt; 61 дн.), Traffic Lift от 2 млн ₽</li>
+                            <li><span class="highlight">TCL</span> — доступен BLS от 3 млн ₽ до НДС при длительности РК &lt; 61 дня, для Homepage Video и Homepage Banner</li>
+                            <li><span class="highlight">LG</span> — доступен BLS от 3 млн ₽ до НДС при длительности РК &lt; 61 дня</li>
+                            <li><span class="highlight">Haier</span> — доступен BLS от 3 млн ₽ до НДС при длительности РК &lt; 61 дня (обязательно наличие ещё как минимум одного вендора в МП — нужен охват для формирования выборки)</li>
+                            <li><span class="highlight">Xiaomi</span> — ❌ BLS не доступен</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Соцдем -->
-        <div class="info-block">
-            <div class="info-block-title">👤 Определение соцдема пользователя</div>
-            <div class="info-block-text">
-                <p>Smart TV дает размытый профиль, поэтому платформа:</p>
-                <ul>
-                    <li>Связывает ТВ с другими устройствами в домашней сети и собирает устойчивый профиль домохозяйства.</li>
-                    <li>Из профиля выбирается «главное» устройство или наиболее выраженный пользовательский профиль.</li>
-                    <li>Он используется для соц-дем-таргетинга на Smart TV.</li>
-                </ul>
-                <p style="margin-top:4px;">
-                    <span class="highlight">Stable ID</span> — устойчивый обезличенный идентификатор на базе стабильного сигнала (устройство, аккаунт, телефон, e-mail). Помогает «склеить» показы на ТВ с профилем пользователя.
-                </p>
+
+        <!-- ===== 5. Исследования и верификация ===== -->
+        <div class="accordion-section">
+            <div class="accordion-header" :class="{ open: openSections.research }" @click="openSections.research = !openSections.research">
+                <span>🔬 Исследования и верификация</span>
+                <span class="chevron">›</span>
             </div>
-        </div>
-        <!-- Охват и частота -->
-        <div class="info-block">
-            <div class="info-block-title">📊 Охват и частота в Smart TV</div>
-            <div class="info-block-text">
-                <p>Smart TV — cookless среда. Частота и охват считаются по:</p>
-                <ul>
-                    <li><span class="highlight">Device ID / Ad ID</span> — уникальный идентификатор Smart TV, ОС или CTV-приложения.</li>
-                    <li><span class="highlight">Household ID</span> — один IP домохозяйства объединяет несколько устройств (TV + мобильные + десктопы).</li>
-                </ul>
-                <p style="margin-top:4px;">
-                    <span class="highlight">Охват</span> — количество уникальных устройств или домохозяйств, где был хотя бы один показ кампании за период.<br>
-                    <span class="highlight">Частота</span> — среднее число показов на одно устройство/домохозяйство.
-                </p>
-                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
-                    📌 DSP определяет домашние сети, объединяет устройства внутри одного домохозяйства и использует профиль наиболее активного устройства для таргетинга.
-                </p>
-                <p style="margin-top:6px;">
-                    <span class="highlight">Уникальный охват ЦА 25-55 в Москве и СПб</span> <span class="definition">по анкете для Starlink</span> — 2,7 млн устройств. Эта цифра посчитана только по <strong>OTT</strong> — по IPTV охват/ёмкость аудитории 25-55 в анкете отдельно не размечены («нет»).
-                </p>
-                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
-                    📌 Мобильный трафик внутри OTT-инвентаря — 0% (только Smart TV).
-                </p>
-            </div>
-        </div>
-        <!-- Форматы (общий список) -->
-        <div class="info-block">
-            <div class="info-block-title">📺 Основные форматы размещения</div>
-            <div class="info-block-text">
-                <p><span class="highlight">onCTV Apps:</span> Pre-roll, Switch-roll, Patch-roll, Баннер на паузе</p>
-                <p style="margin-top:4px;"><span class="highlight">onCTV Vendors:</span> баннерные и видеоформаты в ОС телевизоров</p>
-                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
-                    📌 <span class="highlight">Видеоформат в ОС</span> размещают: LG, TCL, Xiaomi
-                </p>
-            </div>
-        </div>
-        <!-- Таргетинги (общие) -->
-        <div class="info-block">
-            <div class="info-block-title">🎯 Общие возможности таргетинга</div>
-            <div class="info-block-text">
-                <p><span class="highlight">onCTV Apps:</span></p>
-                <div class="info-tags">
-                    <span class="tag">ГЕО</span>
-                    <span class="tag">Пол/возраст</span>
-                    <span class="tag">Доход (диагонали)</span>
-                    <span class="tag">Жанры ТВ</span>
-                    <span class="tag">Контент за 30 дней</span>
-                    <span class="tag">Интересы</span>
-                    <span class="tag">Частота показов</span>
-                    <span class="tag">Временные интервалы</span>
-                    <span class="tag">Контент сейчас (жанр/тематика)</span>
+            <div class="accordion-body" v-show="openSections.research">
+                <div class="info-block">
+                    <div class="info-block-text">
+                        <p><span class="highlight">Доступные исследования:</span> BLS, Traffic/visit-lift, поствью, кросс-канальная атрибуция, Adriver, Weborama, Adjust/AppsFlyer.</p>
+                        <p style="margin-top:4px;"><span class="highlight">Верификаторы:</span> все известные верификаторы, в процессе интеграции с Mediahills.</p>
+                        <p style="margin-top:4px;"><span class="highlight">Панельные измерители:</span> OMI, Mediahills, Tiburon.</p>
+                        <p style="margin-top:8px;"><span class="highlight">Как устроен замер Post-View-конверсий</span> — 3 варианта:</p>
+                        <ul>
+                            <li><strong>Опция 1 — кастомная CTV-атрибуция в AdRiver.</strong> Есть техническая возможность связать показы на CTV с последующими визитами и целевыми действиями на сайте клиента. Метчинг идентификатора из aextid с HHID/Stable ID домохозяйства. Атрибуция строится только на показах в домохозяйствах — абонентах Ростелекома.</li>
+                            <li><strong>Опция 2 — замер post-view с Weborama.</strong> Модель кросс-канального замера строится на анализе совокупности технических и поведенческих сигналов и определяет вероятность принадлежности показа и конверсии одному домохозяйству или группе связанных устройств. Дополнительно подключаются данные телеком-операторов. Атрибуция — по домохозяйству, а не по конкретному пользователю.</li>
+                            <li><strong>Опция 3 — Adjust/AppsFlyer (только onCTV Apps).</strong> Позволяет трекать конверсии в мобильном приложении клиента и связывать их с показами на Smart TV. Нужно: аккаунт в Adjust или AppsFlyer, интеграция мобильного приложения в один из верификаторов, настройка целей и кроссплатформенной верификации, выбор нас партнёром в кабинете верификатора, формирование пикселей.</li>
+                        </ul>
+                        <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                            📌 Детали по трекингу для каждого формата — в карточках.
+                        </p>
+                    </div>
                 </div>
-                <p style="margin-top:6px; font-size:13px; color:#8a7aaa;">
-                    <span class="highlight">В вендорах:</span> таргетинги ограничены — детали в карточках форматов. TCL — только ГЕО и диагонали устройств. LG — соц.дем, ГЕО, диагонали, приложения, жанры. Xiaomi и Haier — таргетинги не настраиваются, ГЕО автоматически РФ.
-                </p>
             </div>
         </div>
-        <!-- Модели закупки -->
-        <div class="info-block">
-            <div class="info-block-title">💰 Модели закупки и коммерческие условия</div>
-            <div class="info-block-text">
-                <ul>
-                    <li><span class="highlight">Модель:</span> только CPM</li>
-                    <li><span class="highlight">Минимальный бюджет (месяц, до НДС):</span> onCTV Apps — 500 000 ₽; onCTV Vendors: LG, Xiaomi, Haier — 500 000 ₽; TCL — 1 000 000 ₽, если в плане есть Launcher и/или Browser, если этих форматов нет в плане — можно 500 000 ₽</li>
-                    <li><span class="highlight">Сезонников и наценок нет</span>, кроме LG — там действует наценка +10% за таргетинги</li>
-                </ul>
-            </div>
-        </div>
-        <!-- BLS (общее) -->
-        <div class="info-block">
-            <div class="info-block-title">🔬 BLS — исследования эффективности</div>
-            <div class="info-block-text">
-                <ul>
-                    <li><span class="highlight">onCTV Apps</span> — BLS от 1.5 млн ₽ (РК &lt; 61 дн.), Traffic Lift от 2 млн ₽</li>
-                    <li><span class="highlight">TCL</span> — доступен BLS от 3 млн ₽ до НДС при длительности РК &lt; 61 дня, для Homepage Video и Homepage Banner</li>
-                    <li><span class="highlight">LG</span> — доступен BLS от 3 млн ₽ до НДС при длительности РК &lt; 61 дня</li>
-                    <li><span class="highlight">Haier</span> — доступен BLS от 3 млн ₽ до НДС при длительности РК &lt; 61 дня (обязательно наличие ещё как минимум одного вендора в МП — нужен охват для формирования выборки)</li>
-                    <li><span class="highlight">Xiaomi</span> — ❌ BLS не доступен</li>
-                </ul>
-            </div>
-        </div>
-        <!-- Исследования и верификация (общее) -->
-        <div class="info-block">
-            <div class="info-block-title">📊 Исследования и верификация</div>
-            <div class="info-block-text">
-                <p><span class="highlight">Доступные исследования:</span> BLS, Traffic/visit-lift, поствью, кросс-канальная атрибуция, Adriver, Weborama, Adjust/AppsFlyer.</p>
-                <p style="margin-top:4px;"><span class="highlight">Верификаторы:</span> все известные верификаторы, в процессе интеграции с Mediahills.</p>
-                <p style="margin-top:4px;"><span class="highlight">Панельные измерители:</span> OMI, Mediahills, Tiburon.</p>
-                <p style="margin-top:8px;"><span class="highlight">Как устроен замер Post-View-конверсий</span> <span class="definition">по анкете для Starlink, 3 варианта</span>:</p>
-                <ul>
-                    <li><strong>Опция 1 — кастомная CTV-атрибуция в AdRiver.</strong> Есть техническая возможность связать показы на CTV с последующими визитами и целевыми действиями на сайте клиента. Метчинг идентификатора из aextid с HHID/Stable ID домохозяйства. Атрибуция строится только на показах в домохозяйствах — абонентах Ростелекома.</li>
-                    <li><strong>Опция 2 — замер post-view с Weborama.</strong> Модель кросс-канального замера строится на анализе совокупности технических и поведенческих сигналов и определяет вероятность принадлежности показа и конверсии одному домохозяйству или группе связанных устройств. Дополнительно подключаются данные телеком-операторов. Атрибуция — по домохозяйству, а не по конкретному пользователю.</li>
-                    <li><strong>Опция 3 — Adjust/AppsFlyer (только onCTV Apps).</strong> Позволяет трекать конверсии в мобильном приложении клиента и связывать их с показами на Smart TV. Нужно: аккаунт в Adjust или AppsFlyer, интеграция мобильного приложения в один из верификаторов, настройка целей и кроссплатформенной верификации, выбор нас партнёром в кабинете верификатора, формирование пикселей.</li>
-                </ul>
-                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
-                    📌 Детали по трекингу для каждого формата — в карточках.
-                </p>
-            </div>
-        </div>
+
         <!-- Прайс-листы -->
         <div class="price-list-section">
             <h4>📎 Прайс-листы (вложения)</h4>
@@ -816,6 +883,10 @@
                     <div class="stats-title">📊 Аудитория и статистика</div>
 
                     <div class="stats-row">
+                        <span class="label">Уникальный охват (Москва + СПб, ЦА 25-55, OTT)</span>
+                        <span class="value">2,7 млн устройств</span>
+                    </div>
+                    <div class="stats-row">
                         <span class="label">Пол</span>
                         <span class="value">М 45% / Ж 55%</span>
                     </div>
@@ -855,6 +926,9 @@
                             <div class="stats-row"><span class="label">Лицензионный контент</span><span class="value">30%</span></div>
                         </div>
                     </div>
+                    <p style="margin-top:8px; font-size:11px; color:#9a8aaa;">
+                        Охват посчитан только по OTT; отдельного замера охвата по IPTV нет. Мобильный трафик внутри инвентаря — 0% (только Smart TV).
+                    </p>
                 </div>
                 <div class="card-field" v-if="item.link && !item.isStatsCard">
                     <span class="field-label">Ссылка</span>
@@ -937,6 +1011,13 @@ new Vue({
     el: '#app',
     data: {
         activeTab: '',
+        openSections: {
+            inventory: true,
+            targeting: false,
+            reach: false,
+            commercial: true,
+            research: false
+        },
         rawData: [
             // ===== onCTV Apps =====
             // Карточка со статистикой (отдельная)
@@ -1323,6 +1404,11 @@ new Vue({
                 }
             };
             return profiles[vendor] || null;
+        },
+        setAllSections(state) {
+            Object.keys(this.openSections).forEach(key => {
+                this.openSections[key] = state;
+            });
         },
         downloadPriceList(vendor) {
             const links = {
