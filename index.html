@@ -507,6 +507,19 @@
     <!-- ===== ОБЩАЯ ИНФОРМАЦИЯ ===== -->
     <div class="general-info">
         <h3>📌 Общая информация <span class="badge">для всех продуктов</span></h3>
+        <!-- ⚠️ Расхождения с анкетой для Starlink -->
+        <div class="info-block">
+            <div class="info-block-title">⚠️ Расхождения с анкетой для Starlink (нужна сверка)</div>
+            <div class="info-block-text" style="border-left-color:#d8b0b0;">
+                <ul>
+                    <li><span class="tag tag-danger">DMP / ОФД</span> Ниже в блоке «Технология таргетинга» указано, что подключаются данные <strong>DMP и ОФД</strong> для обогащения профилей. В анкете для Starlink по всем пунктам DMP (3PD/1PD-сегменты, доступ к Data Marketplaces, Telecom Data, Offline/Online Shoppers Data, Financial/Pharmacy-data и т.д.) стоит <strong>«нет»</strong>. Прямое противоречие, оставила обе версии — нужно уточнить у продукта, что верно.</li>
+                    <li><span class="tag tag-danger">TCL Homepage Video, BLS</span> Ранее в файле было условие «от 7 млн показов» — в анкете такого порога нет, указано только ограничение по длительности РК (&lt; 61 дня). Заменила формулировку на анкетную, старое условие не подтверждено.</li>
+                    <li><span class="tag tag-danger">LG Home Hero</span> В файле был один формат «LG Home Hero». В анкете это два отдельных формата с одинаковыми коммерческими условиями — <strong>LG Home Hero Banner</strong> и <strong>LG Home Hero Video</strong> (у видео дополнительно есть VTR). Разделила на 2 карточки.</li>
+                    <li><span class="tag tag-danger">Инвентарь onCTV Apps</span> Список площадок в старых данных («У нас есть»: ivi.ru, okko.tv, cto.ru, Aptoide, TubiTV и др.) отличается от актуального списка в самой анкете (START, KION, Кинопоиск, Билайн ТВ, RUTUBE и др.) — похоже на устаревшие данные. Обновила на актуальный список из анкеты.</li>
+                    <li><span class="tag tag-warning">TCL Homepage Banner, атрибуция</span> Не противоречие, а дополнение: в анкете интеграция Adjust/AppsFlyer указана не только для Homepage Video, но и для Homepage Banner — добавила.</li>
+                </ul>
+            </div>
+        </div>
         <!-- Платформы + OTT/IPTV -->
         <div class="info-block">
             <div class="info-block-title">🏷️ Инвентарь и платформы</div>
@@ -521,6 +534,13 @@
                     📌 В ряде OTT-приложений доступно размещение в IPTV (Wink, Peers, Sputnik24, Lime и др.). Отдельно размещение в IPTV не предоставляется.
                 </p>
                 <p style="margin-top:4px;"><strong>onCTV Vendors</strong> — размещение непосредственно в ОС телевизоров: Xiaomi, Haier, LG, TCL.</p>
+                <p style="margin-top:6px;"><span class="highlight">Актуальный список площадок onCTV Apps</span> <span class="definition">по анкете для Starlink, 59 сервисов</span> — можно выбирать/исключать инвентарь (AVOD/Streaming) и ограничивать список каналов:</p>
+                <p style="margin-top:4px; font-size:13px; line-height:1.5;">
+                    START, KION, Okko, Wink, Кинопоиск, Билайн ТВ, PREMIER, Иви, Матч ТВ, Amediateka, VK Видео, СТС—ТВ, RUTUBE, Смотрёшка, ViNTERA.TV, ProgTV Android, 24ТВ, Лайм HD TV, OttPlayer, Триколор Кино и ТВ, Tvigle, Большое ТВ, Телеканал Домашний, Sputnik24, Kinogo, Kartina, Kinon, Flivora, TVzavr, Лайт Цифровое ТВ онлайн, Цифровое ТВ, Peers.TV, ТВ+, Эфир ТВ, ЦТВ, Лайм, VIDAA Smart TV, Эфир ТВ+, Perfect Player IPTV, IPTV (simple), TV Online, RusTV, RTRS.Плюс, Inetcom.TV, TVOЁ, IPTVPORTAL, TVGuide, Смотрим, Lampa, Лайм HD TV онлайн, Prisma TV, KinoHome, ShowJet, Фильмы и Сериалы, Light HD TV, Zona, VoKino и др.
+                </p>
+                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                    📌 Категории контента внутри инвентаря: топ-каналы, кулинария, развлекательные, музыкальные, путешествия и документальные, научно-популярные, мода и стиль, нишевые музыкальные, «нишевые» и тематические, познавательные, детские, спортивные и ЗОЖ.
+                </p>
             </div>
         </div>
         <!-- Пакеты onCTV Apps -->
@@ -547,10 +567,43 @@
                 <ul>
                     <li><span class="highlight">Метчинг</span> по Stable ID и cookies для идентификации пользователей и присвоения интересов на основе просмотренного контента и используемых приложений.</li>
                     <li><span class="highlight">Match rate</span> на CTV — 7-10%, поэтому применяются широкие таргетинги по базовым категориям (спорт, здоровье, семья) и LAL.</li>
-                    <li>Дополнительно подключаются данные <span class="highlight">DMP и ОФД</span> для обогащения профилей.</li>
+                    <li>Дополнительно подключаются данные <span class="highlight">DMP и ОФД</span> для обогащения профилей. <span class="tag tag-danger">⚠️ по анкете для Starlink все параметры DMP отмечены «нет» — см. блок расхождений выше</span></li>
                 </ul>
                 <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
                     📌 <span class="highlight">Unskip-видео</span> — настраивается с 6-й по 20-ю секунду ролика.
+                </p>
+            </div>
+        </div>
+        <!-- Технические возможности и DMP (анкета Starlink) -->
+        <div class="info-block">
+            <div class="info-block-title">🛠️ Технические возможности и DMP <span class="definition" style="margin-left:6px;">по анкете для Starlink</span></div>
+            <div class="info-block-text">
+                <p><span class="highlight">Поддерживается:</span></p>
+                <div class="info-tags">
+                    <span class="tag tag-success">API Integration</span>
+                    <span class="tag tag-success">Ретаргетинг Smart TV ↔ веб (в обе стороны)</span>
+                </div>
+                <p style="margin-top:8px;"><span class="highlight">Не поддерживается:</span></p>
+                <div class="info-tags">
+                    <span class="tag tag-danger">Post-campaign logs</span>
+                    <span class="tag tag-danger">Smart-links / deep-links</span>
+                    <span class="tag tag-danger">DCO</span>
+                    <span class="tag tag-danger">ТВ-ретаргетинг (видевшие / не видевшие рекламу)</span>
+                    <span class="tag tag-danger">Кросс-канальная частота Desktop/Mobile/CTV и с 3P DSP</span>
+                    <span class="tag tag-danger">3rd party data, эксклюзивные data-партнёрства</span>
+                    <span class="tag tag-danger">Кастомные сегменты, супергео, WL/BL по приложениям (кроме TCL)</span>
+                </div>
+                <p style="margin-top:8px;"><span class="highlight">DMP (по анкете — везде «нет»):</span></p>
+                <div class="info-tags">
+                    <span class="tag tag-danger">3PD / 1PD сегменты</span>
+                    <span class="tag tag-danger">Access to Data Marketplaces</span>
+                    <span class="tag tag-danger">Telecom Data</span>
+                    <span class="tag tag-danger">Offline/Online Shoppers Data</span>
+                    <span class="tag tag-danger">Financial Providers Data</span>
+                    <span class="tag tag-danger">Pharmacy-data</span>
+                </div>
+                <p style="margin-top:8px; font-size:13px; color:#8a7aaa;">
+                    📌 Это прямо противоречит формулировке про «подключение DMP и ОФД» выше — см. блок расхождений в начале страницы.
                 </p>
             </div>
         </div>
@@ -604,6 +657,12 @@
                 <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
                     📌 DSP определяет домашние сети, объединяет устройства внутри одного домохозяйства и использует профиль наиболее активного устройства для таргетинга.
                 </p>
+                <p style="margin-top:6px;">
+                    <span class="highlight">Уникальный охват ЦА 25-55 в Москве и СПб</span> <span class="definition">по анкете для Starlink</span> — 2,7 млн устройств. Эта цифра посчитана только по <strong>OTT</strong> — по IPTV охват/ёмкость аудитории 25-55 в анкете отдельно не размечены («нет»).
+                </p>
+                <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
+                    📌 Мобильный трафик внутри OTT-инвентаря — 0% (только Smart TV).
+                </p>
             </div>
         </div>
         <!-- Форматы (общий список) -->
@@ -655,9 +714,9 @@
             <div class="info-block-text">
                 <ul>
                     <li><span class="highlight">onCTV Apps</span> — BLS от 1.5 млн ₽ (РК &lt; 61 дн.), Traffic Lift от 2 млн ₽</li>
-                    <li><span class="highlight">TCL</span> — доступен BLS от 3 млн ₽ до НДС для Homepage Video и Homepage Banner</li>
-                    <li><span class="highlight">LG</span> — доступен BLS от 3 млн ₽ до НДС</li>
-                    <li><span class="highlight">Haier</span> — доступен BLS от 3 млн ₽ до НДС (обязательно наличие ещё как минимум одного вендора в МП — нужен охват для формирования выборки)</li>
+                    <li><span class="highlight">TCL</span> — доступен BLS от 3 млн ₽ до НДС при длительности РК &lt; 61 дня, для Homepage Video и Homepage Banner</li>
+                    <li><span class="highlight">LG</span> — доступен BLS от 3 млн ₽ до НДС при длительности РК &lt; 61 дня</li>
+                    <li><span class="highlight">Haier</span> — доступен BLS от 3 млн ₽ до НДС при длительности РК &lt; 61 дня (обязательно наличие ещё как минимум одного вендора в МП — нужен охват для формирования выборки)</li>
                     <li><span class="highlight">Xiaomi</span> — ❌ BLS не доступен</li>
                 </ul>
             </div>
@@ -669,6 +728,12 @@
                 <p><span class="highlight">Доступные исследования:</span> BLS, Traffic/visit-lift, поствью, кросс-канальная атрибуция, Adriver, Weborama, Adjust/AppsFlyer.</p>
                 <p style="margin-top:4px;"><span class="highlight">Верификаторы:</span> все известные верификаторы, в процессе интеграции с Mediahills.</p>
                 <p style="margin-top:4px;"><span class="highlight">Панельные измерители:</span> OMI, Mediahills, Tiburon.</p>
+                <p style="margin-top:8px;"><span class="highlight">Как устроен замер Post-View-конверсий</span> <span class="definition">по анкете для Starlink, 3 варианта</span>:</p>
+                <ul>
+                    <li><strong>Опция 1 — кастомная CTV-атрибуция в AdRiver.</strong> Есть техническая возможность связать показы на CTV с последующими визитами и целевыми действиями на сайте клиента. Метчинг идентификатора из aextid с HHID/Stable ID домохозяйства. Атрибуция строится только на показах в домохозяйствах — абонентах Ростелекома.</li>
+                    <li><strong>Опция 2 — замер post-view с Weborama.</strong> Модель кросс-канального замера строится на анализе совокупности технических и поведенческих сигналов и определяет вероятность принадлежности показа и конверсии одному домохозяйству или группе связанных устройств. Дополнительно подключаются данные телеком-операторов. Атрибуция — по домохозяйству, а не по конкретному пользователю.</li>
+                    <li><strong>Опция 3 — Adjust/AppsFlyer (только onCTV Apps).</strong> Позволяет трекать конверсии в мобильном приложении клиента и связывать их с показами на Smart TV. Нужно: аккаунт в Adjust или AppsFlyer, интеграция мобильного приложения в один из верификаторов, настройка целей и кроссплатформенной верификации, выбор нас партнёром в кабинете верификатора, формирование пикселей.</li>
+                </ul>
                 <p style="margin-top:4px; font-size:13px; color:#8a7aaa;">
                     📌 Детали по трекингу для каждого формата — в карточках.
                 </p>
@@ -845,6 +910,10 @@
                     <span class="field-label">Запуск</span>
                     <span class="field-value"><span class="badge badge-info">{{ item.openrtb }}</span></span>
                 </div>
+                <div class="card-field" v-if="item.benchmarks && !item.isStatsCard">
+                    <span class="field-label">Бенчмарки</span>
+                    <span class="field-value">{{ item.benchmarks }}</span>
+                </div>
                 <div class="card-footer" v-if="item.files && item.files.length && !item.isStatsCard">
                     <span>📎 Материалы</span>
                     <span>
@@ -947,11 +1016,12 @@ new Vue({
                 cpm: '600 ₽',
                 cost: 'до 15 000 000 ₽',
                 targeting: 'только ГЕО и диагонали устройств',
-                tracking: '✅ <span class="badge badge-success">пиксель любого верификатора</span>',
-                bls: 'доступен BLS от 3 млн ₽ до НДС (от 7 млн показов)',
+                tracking: '✅ <span class="badge badge-success">пиксель любого верификатора + интеграция Adjust/AppsFlyer + пиксель PBD + пиксель MediaHills</span>',
+                bls: 'доступен BLS от 3 млн ₽ до НДС при длительности РК < 61 дня',
                 timeSettings: 'можно настроить время показа',
-                research: 'BLS, Traffic/visit-lift, Adjust (мобильная атрибуция)',
+                research: 'BLS, Traffic/visit-lift, Adjust/AppsFlyer (мобильная атрибуция)',
                 openrtb: 'openRTB (500 000 ₽) или через Китай (1 000 000 ₽)',
+                benchmarks: 'VTR (15 сек) ~85%, безкликовый формат, частота — 3/мес',
                 files: ['https://disk.yandex.ru/d/httq4XYvz3vnsw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
             },
             {
@@ -963,11 +1033,12 @@ new Vue({
                 cpm: '600 ₽',
                 cost: 'до 12 000 000 ₽',
                 targeting: 'только ГЕО и диагонали устройств',
-                tracking: '✅ <span class="badge badge-success">пиксель любого верификатора</span>',
-                bls: 'доступен BLS от 3 млн ₽ до НДС',
+                tracking: '✅ <span class="badge badge-success">пиксель любого верификатора + интеграция Adjust/AppsFlyer + пиксель PBD + пиксель MediaHills</span>',
+                bls: 'доступен BLS от 3 млн ₽ до НДС при длительности РК < 61 дня',
                 timeSettings: 'можно настроить время показа',
-                research: 'BLS, Traffic/visit-lift',
+                research: 'BLS, Traffic/visit-lift, Adjust/AppsFlyer (мобильная атрибуция)',
                 openrtb: 'openRTB (500 000 ₽) или через Китай (1 000 000 ₽)',
+                benchmarks: 'CTR ~0.2%, частота — 3/мес',
                 files: ['https://disk.yandex.ru/d/httq4XYvz3vnsw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
             },
             {
@@ -984,6 +1055,7 @@ new Vue({
                 timeSettings: '—',
                 research: '—',
                 openrtb: 'только через Китай (1 000 000 ₽)',
+                benchmarks: 'CTR ~0.1%, частота — 3/мес',
                 files: ['https://disk.yandex.ru/d/httq4XYvz3vnsw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
             },
             {
@@ -1000,6 +1072,7 @@ new Vue({
                 timeSettings: '—',
                 research: '—',
                 openrtb: 'только через Китай (1 000 000 ₽)',
+                benchmarks: 'CTR ~0.05%, частота — 3/мес',
                 files: ['https://disk.yandex.ru/d/httq4XYvz3vnsw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
             },
             // ===== Haier =====
@@ -1013,10 +1086,11 @@ new Vue({
                 cpm: '600 ₽',
                 cost: 'до 2 100 000 ₽',
                 targeting: 'нет',
-                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой), пиксель на клик в кодированном виде</span>',
-                bls: 'доступен от 3 млн ₽ до НДС (при наличии другого вендора в МП)',
+                tracking: '✅ <span class="badge badge-success">пиксель на показ (любой) + пиксель PBD, пиксель на клик — только в кодированном виде</span>',
+                bls: 'доступен от 3 млн ₽ до НДС при длительности РК < 61 дня (при наличии другого вендора в МП)',
                 timeSettings: 'ручная автоматизация (теоретически можно)',
                 research: 'BLS (при наличии другого вендора)',
+                benchmarks: 'CTR ~0.1%, частота — 3/мес',
                 files: ['https://disk.yandex.ru/d/NhhQHNQLv_al0Q', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
             },
             // ===== Xiaomi =====
@@ -1024,16 +1098,17 @@ new Vue({
                 vendor: 'Xiaomi',
                 format: 'Xiaomi PatchWall Homepage',
                 link: 'https://disk.yandex.ru/d/9Rs3PRu8plGDTw',
-                description: 'Размещение на первой видимой странице платформы. Баннер показывается вместе с роликом, воспроизведение которого начинается при наведении на сам баннер.',
+                description: 'Размещение на первой видимой странице платформы. Баннер показывается вместе с роликом (воспроизведение начинается при наведении на сам баннер), либо двумя баннерами.',
                 geo: 'РФ (автоматически)',
                 impressions: '15 000 000',
                 cpm: '600 ₽',
                 cost: 'до 9 000 000 ₽',
                 targeting: 'нет',
                 tracking: '✅ <span class="badge badge-success">пиксель на клик (любой)</span><br>⚠️ <span class="badge badge-warning">пиксель на показ — только Adriver</span>',
-                bls: 'не доступен',
+                bls: 'нет возможности проведения',
                 timeSettings: 'можно настроить время показа',
                 research: 'Weborama (кросс-канальный замер post-view)',
+                benchmarks: 'CTR ~0.2%, частота — 4/мес',
                 files: ['https://disk.yandex.ru/d/eyNwLyZBzbFcCg', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
             },
             {
@@ -1047,9 +1122,10 @@ new Vue({
                 cost: 'до 4 500 000 ₽',
                 targeting: 'нет',
                 tracking: '✅ <span class="badge badge-success">пиксель на клик (любой)</span><br>⚠️ <span class="badge badge-warning">пиксель на показ — только Adriver</span>',
-                bls: 'не доступен',
+                bls: 'нет возможности проведения',
                 timeSettings: 'можно настроить время показа',
                 research: 'Weborama (кросс-канальный замер post-view)',
+                benchmarks: 'CTR ~0.2%, частота — 4/мес',
                 files: ['https://disk.yandex.ru/d/eyNwLyZBzbFcCg', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
             },
             {
@@ -1063,25 +1139,43 @@ new Vue({
                 cost: 'до 10 500 000 ₽',
                 targeting: 'нет',
                 tracking: '✅ <span class="badge badge-success">пиксель на клик (любой)</span><br>⚠️ <span class="badge badge-warning">пиксель на показ — только Adriver</span>',
-                bls: 'не доступен',
+                bls: 'нет возможности проведения',
                 timeSettings: 'можно настроить время показа',
                 research: 'Weborama (кросс-канальный замер post-view)',
+                benchmarks: 'CTR ~0.1%, частота — 4/мес',
                 files: ['https://disk.yandex.ru/d/eyNwLyZBzbFcCg', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
             },
             // ===== LG =====
             {
                 vendor: 'LG',
-                format: 'LG Home Hero',
+                format: 'LG Home Hero Banner',
                 link: 'https://disk.yandex.ru/d/qTleksZkgtKcsQ',
-                description: '⭐ Эксклюзивный формат, доступен только у нас. Слот на стартовой странице в ОС LG (не LG Channels). Может осуществляться переход на посадочную клиента в браузере или в установленное приложение.',
+                description: '⭐ Эксклюзивный формат, доступен только у нас. Баннер-слот на стартовой странице в ОС LG (не LG Channels). Переход на посадочную клиента в браузере или в установленное приложение на LG.',
                 impressions: '40 000 000',
                 cpm: '700 ₽',
                 cost: 'до 28 000 000 ₽',
-                targeting: 'соц.дем, ГЕО, диагонали, приложения, жанры (Movie/Sports/Action/Reality/Comedy/Drama/Sci-Fi)',
-                tracking: '✅ <span class="badge badge-success">пиксель любого верификатора</span>',
-                bls: 'доступен BLS от 3 млн ₽ до НДС',
+                targeting: 'соц.дем, ГЕО, диагонали, тип устройства, жанры контента (Movie/Sports/Action/Reality/Comedy/Drama/Sci-Fi)',
+                tracking: '✅ <span class="badge badge-success">пиксель любого верификатора + пиксель PBD</span>',
+                bls: 'доступен BLS от 3 млн ₽ до НДС при длительности РК < 61 дня',
                 timeSettings: 'можно настроить время показа',
                 research: 'BLS, Traffic/visit-lift, AppsFlyer (мобильная атрибуция)',
+                benchmarks: 'CTR ~0.25%, частота — 3/мес',
+                files: ['https://disk.yandex.ru/d/QbJ1y74keaP6zw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
+            },
+            {
+                vendor: 'LG',
+                format: 'LG Home Hero Video',
+                link: 'https://disk.yandex.ru/d/qTleksZkgtKcsQ',
+                description: '⭐ Эксклюзивный формат, доступен только у нас. Видео-слот на стартовой странице в ОС LG (не LG Channels). Переход на посадочную клиента в браузере или в установленное приложение на LG.',
+                impressions: '40 000 000',
+                cpm: '700 ₽',
+                cost: 'до 28 000 000 ₽',
+                targeting: 'соц.дем, ГЕО, диагонали, тип устройства, жанры контента (Movie/Sports/Action/Reality/Comedy/Drama/Sci-Fi)',
+                tracking: '✅ <span class="badge badge-success">пиксель любого верификатора + пиксель PBD</span>',
+                bls: 'доступен BLS от 3 млн ₽ до НДС при длительности РК < 61 дня',
+                timeSettings: 'можно настроить время показа',
+                research: 'BLS, Traffic/visit-lift, AppsFlyer (мобильная атрибуция)',
+                benchmarks: 'CTR ~0.25%, VTR (15 сек) ~85%, частота — 3/мес',
                 files: ['https://disk.yandex.ru/d/QbJ1y74keaP6zw', 'https://disk.yandex.ru/d/9gV9oEiSjRZ4oA']
             },
             {
@@ -1194,17 +1288,18 @@ new Vue({
                 'TCL': {
                     'Тип': 'ОС телевизора',
                     'Таргетинг': 'только ГЕО и диагонали устройств (РФ)',
-                    'Трекинг': 'все форматы — пиксель любого верификатора на показ',
-                    'Мин. бюджет': '1 000 000 ₽, если в плане Launcher и/или Browser; 500 000 ₽, если этих форматов нет в плане',
-                    'BLS': 'для Homepage Video и Homepage Banner — от 3 млн ₽ до НДС',
-                    'Время показа': 'можно настроить для Homepage Video и Homepage Banner'
+                    'Трекинг': 'Homepage Video/Banner — пиксель + Adjust/AppsFlyer + PBD + MediaHills; Launcher/Browser — только пиксель',
+                    'Мин. бюджет': '1 000 000 ₽ для Launcher и Browser; 500 000 ₽ для Homepage Video и Homepage Banner',
+                    'BLS': 'для Homepage Video и Homepage Banner — от 3 млн ₽ до НДС при длительности РК &lt; 61 дня',
+                    'Время показа': 'можно настроить для Homepage Video и Homepage Banner',
+                    'Качество трафика': 'IVT &lt;1%, Brand Safety 97-99%, In Geo 95-100%, воспроизведение со звуком'
                 },
                 'Haier': {
                     'Тип': 'ОС телевизора',
                     'Таргетинг': 'нет (ГЕО автоматически РФ)',
-                    'Трекинг': 'пиксель на показ (любой), кликовая в кодированном виде',
+                    'Трекинг': 'пиксель на показ (любой) + PBD, кликовая — только в кодированном виде',
                     'Мин. бюджет': '500 000 ₽',
-                    'BLS': 'от 3 млн ₽ до НДС (при наличии другого вендора в МП)',
+                    'BLS': 'от 3 млн ₽ до НДС при длительности РК &lt; 61 дня (при наличии другого вендора в МП)',
                     'Время показа': 'ручная автоматизация'
                 },
                 'Xiaomi': {
@@ -1212,18 +1307,19 @@ new Vue({
                     'Таргетинг': 'нет (ГЕО автоматически РФ)',
                     'Трекинг': 'пиксель на клик (любой), на показ — только Adriver',
                     'Мин. бюджет': '500 000 ₽',
-                    'BLS': '❌ не доступен',
+                    'BLS': '❌ нет возможности проведения',
                     'Время показа': 'можно настроить',
+                    'Частота': 'рекомендуемая — 4/мес (выше, чем у остальных вендоров)',
                     'Эксклюзив': 'Branding + Banner — только у нас'
                 },
                 'LG': {
                     'Тип': 'ОС телевизора',
-                    'Таргетинг': 'широкие (соц.дем, ГЕО, диагонали, приложения, жанры, Smart TV Type, App Usage)',
-                    'Трекинг': 'пиксель любого верификатора',
+                    'Таргетинг': 'широкие (соц.дем, ГЕО, диагонали, тип устройства, жанры/интересы контента)',
+                    'Трекинг': 'пиксель любого верификатора + пиксель PBD',
                     'Мин. бюджет': '500 000 ₽',
-                    'BLS': 'от 3 млн ₽ до НДС',
+                    'BLS': 'от 3 млн ₽ до НДС при длительности РК &lt; 61 дня',
                     'Время показа': 'можно настроить',
-                    'Особенности': 'наценка +10% за таргетинги, эксклюзивный Home Hero'
+                    'Особенности': 'наценка +10% за таргетинги; Home Hero — эксклюзив, представлен как Banner и как Video (одинаковые условия)'
                 }
             };
             return profiles[vendor] || null;
